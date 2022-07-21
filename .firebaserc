@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "mochuco-a185b"
+  },
+  "targets": {
+    "mochuco-a185b": {
+      "hosting": {
+        "qr_code_scanner": [
+          "mochuco-a185b"
+        ]
+      }
+    }
+  }
+}
