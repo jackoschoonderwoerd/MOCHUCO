@@ -1,1 +1,8 @@
-<p>venue works!</p>
+<div class="page-container">
+  <div class="venue-name" [innerHTML]="(objectService.venue$|async).name">
+    <!-- {{(objectService.venue$|async).name}} -->
+  </div>
+  <div class="venue-content" [innerHTML]="(objectService.venue$|async).content">
+    <!-- {{(objectService.venue$|async).content}} -->
+  </div>
+</div>

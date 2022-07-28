@@ -1,4 +1,9 @@
-.main-container {
-    background-color: pink;
-    padding: 1rem;
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  .logo {
+  }
+  .venue-name {
+    text-transform: uppercase;
+  }
 }

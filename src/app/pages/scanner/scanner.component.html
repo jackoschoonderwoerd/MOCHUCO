@@ -1,7 +1,6 @@
-<div class="container" style="padding: 0%;">
+<div class="page-container" style="padding: 0%;">
   <div class="row justify-content-center align-items-center">
-    <div class="version" style="color: white;">Version 05</div>
-    <div class="col-md-6 col-12r" #scanner >
+    <div class="col-md-6 col-12r" #scanner>
       <!-- ngx-scanner-qrcode -->
       <!-- <ngx-scanner-qrcode #action="scanner" (data)="output = $event" (error)="onError($event)"></ngx-scanner-qrcode> -->
 
@@ -17,7 +16,7 @@
 
       <!-- toggleCamera -->
       <div class="text-center">
-        <button (click)="action.toggleCamera()" class="btn"
+        <button id="cameraButton" (click)="action.toggleCamera()" class="btn"
           [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart"
           [disabled]="action.isLoading">
           <img *ngIf="!action.isStart"

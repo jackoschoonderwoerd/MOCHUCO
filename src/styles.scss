@@ -1,19 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-    padding: 0%;
-    margin: 0%;
+  padding: 0%;
+  margin: 0%;
 }
 
 body,
 html {
-    // background: #2c2c2c;
-    height: 100vh;
+  // background: #2c2c2c;
+  display: flex;
 }
-.header {
-    font-size: 1.3rem;
-    text-transform: capitalize;
-}
-.main-container {
-    padding: 1rem;
+body {
+  // border: 3px solid red;
+
+  // width: 100%;
+  // justify-content: center;
+  // background-color: #ccc;
+  // margin: 0;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
 }

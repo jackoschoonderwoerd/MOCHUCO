@@ -1,25 +1,41 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ObjectService } from './pages/object/object.service';
+import { ScannerService } from './pages/scanner/scanner.service';
+
+import { MochucoComponent } from './pages/mochuco/mochuco.component';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-    title = 'qr_code_scanner';
-    output!: string;
+export class AppComponent implements OnInit {
+  title = 'qr_code_scanner';
+  output!: string;
 
-    constructor(
-        private router: Router
-    ) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private objectService: ObjectService,
+    private scannerService: ScannerService,
+    private dialog: MatDialog
+  ) { }
 
-    onError(e: any): void {
-        alert(e);
-    }
-    onData(e: any) {
-        console.log(e)
-        // this.router.navigateByUrl(e);
-        window.open(e, "_blank")
-    }
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((queryParamMap: any) => {
+      if (queryParamMap.params.venueId && queryParamMap.params.objectId) {
+        const venueId = queryParamMap.params.venueId;
+        const objectId = queryParamMap.params.objectId;
+        this.objectService.setVenue(venueId)
+        this.objectService.setObject(venueId, objectId, 'appComponent')
+        this.objectService.setVenueObjects(venueId);
+        this.scannerService.setIsInApp(true);
+      }
+    });
+    // this.dialog.open(MochucoComponent, {
+    //   maxHeight: '80vh'
+    // })
+  }
 }

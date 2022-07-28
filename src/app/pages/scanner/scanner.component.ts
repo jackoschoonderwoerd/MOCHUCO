@@ -1,79 +1,84 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ObjectService } from '../object/object.service';
+import { ObjectService, Venue } from '../object/object.service';
+import { ScannerService } from './scanner.service';
+import { UiService } from '../../shared/ui.service';
 
 @Component({
-    selector: 'app-scanner',
-    templateUrl: './scanner.component.html',
-    styleUrls: ['./scanner.component.scss']
+  selector: 'app-scanner',
+  templateUrl: './scanner.component.html',
+  styleUrls: ['./scanner.component.scss']
 })
-export class ScannerComponent implements OnInit {
+export class ScannerComponent implements OnInit, OnDestroy {
 
 
-    @ViewChild('scanner') scanner: ElementRef<HTMLElement>
-    title = 'qr_code_scanner';
-    output!: string;
-    isInApp: boolean = false;
+  @ViewChild('scanner') scanner: ElementRef<HTMLElement>
+  @ViewChild('cameraButton') cameraButton: ElementRef<HTMLElement>
+  title = 'qr_code_scanner';
+  output!: string;
+  isInApp: boolean = false;
 
-    requestedVenueId: string;
-    requestedObjectId: string;
+  requestedVenueId: string;
+  requestedObjectId: string;
 
-    constructor(
-        private router: Router,
-        private objectService: ObjectService,
-        private route: ActivatedRoute
-    ) { }
+  constructor(
+    private router: Router,
+    private objectService: ObjectService,
+    private route: ActivatedRoute,
+    private scannerService: ScannerService,
+    private uiService: UiService,
+  ) { }
 
-    ngOnInit(): void {
-        console.log('scanner component location 1: ', window.location.href)
-        const location = window.location.href
-        const headRemoved = location.split('//')[1]
-        const headAndTailRemoved = headRemoved.split('/')[0]
-        console.log('head and tail removed', headAndTailRemoved);
+  ngOnInit(): void {
+    this.uiService.setIsLoading(true);
+    this.scannerService.setIsScanning(true);
+    // this.cameraButton.nativeElement.click();
+    document.getElementById("cameraButton").click();
 
-        if (headAndTailRemoved === 'mochuco-a185b.web.app') {
-            // if (headAndTailRemoved === 'localhost:4200') {
-            this.isInApp = true
-        }
-    }
-
-    onError(e: any): void {
-        alert(e);
-    }
-    onData(event: string) {
-
-        // window.open(event);
+    const location = window.location.href
+    const headRemoved = location.split('//')[1]
+    const headAndTailRemoved = headRemoved.split('/')[0]
+    this.toggleCamera()
 
 
-        const queryparamsStart = event.split('?')[1]
-        const queryparamsArray = queryparamsStart.split('&')
 
-        const objectId = queryparamsArray[0].split('=')[1];
-        const venueId = queryparamsArray[1].split('=')[1];
-        this.objectService.setObject(venueId, objectId);
+    // if (headAndTailRemoved === 'localhost:4200') {
+    //     this.isInApp = true;
+    //     this.scannerService.setIsInApp(true)
+    // }
 
+  }
 
-        if (this.isInApp) {
-            alert(window.location.href);
-            this.router.navigate(
-                ['object'],
-                {
-                    queryParams: {
-                        objectId: objectId,
-                        venueId: venueId
-                    }
-                })
-            this.objectService.setObjectIdObservable(objectId);
-        } else {
-            console.log('scanner component 58 event: ', event)
-            window.open(event);
-        }
-    }
+  toggleCamera() {
 
+  }
 
-    triggerFalseClick() {
-        console.log('clicking')
-        let el: HTMLElement = this.scanner.nativeElement;
-        el.click();
-    }
+  onError(e: any): void {
+    alert(e);
+  }
+  onData(event: string) {
+    console.log('scanner, onData(){} event: ', event)
+    this.uiService.isLoadingSubject.next(true);
+    const queryparamsStart = event.split('?')[1]
+    const queryparamsArray = queryparamsStart.split('&')
+
+    const objectId = queryparamsArray[0].split('=')[1];
+    const venueId = queryparamsArray[1].split('=')[1];
+    console.log(objectId, venueId)
+    // this.objectService.setVenue(venueId)
+    this.scannerService.isInApp$.subscribe((isInApp: boolean) => {
+      if (!isInApp) {
+        window.open(event); // => to app component
+        return;
+      } else {
+        // this.objectService.setObject(venueId, objectId, 'scanner component');
+        this.objectService.refreshObject(objectId);
+      }
+    })
+    this.scannerService.setIsScanning(false);
+  }
+
+  ngOnDestroy(): void {
+    this.scannerService.setIsScanning(false);
+  }
 }

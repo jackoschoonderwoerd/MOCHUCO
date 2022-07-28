@@ -1,6 +1,5 @@
-<div class="main-container">
-  <div class="version">V1</div>
-  <div class="header" (click)="onLogo()">Logo</div>
-  <!-- <div class="object-name">{{objectService.objectId$|async}}</div> -->
-  <div class="object-name">{{(objectService.objectData$|async).objectName}}</div>
-</div>
+<mat-toolbar color="primary">
+  <div class="logo" (click)="onLogo()">LOGO</div>
+  <div class="venue-name" (click)="onVenue()">{{(objectService.venue$|async).name}}</div>
+
+</mat-toolbar>

@@ -4,8 +4,14 @@ p {
   word-break: break-all;
   font-family: "Courier New", Courier, monospace;
 }
+.page-container {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+}
 div {
   button {
+    display: none;
     border-radius: 50% !important;
     height: 60px;
     width: 60px;
@@ -19,7 +25,4 @@ div {
     background: antiquewhite;
     border-radius: 5px;
   }
-}
-.scanner {
-  border: 3px solid red;
 }

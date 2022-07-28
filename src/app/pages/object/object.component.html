@@ -1,5 +1,9 @@
-<p>object works!!!!</p>
-<p>objectId form url: {{objectId}}</p>
-<p>venuId from url: {{venueId}}</p>
-<!-- <p>objectData$: {{objectData$|async|json}}</p> -->
-<div *ngIf="objectData$|async" [innerHtml]="(objectData$|async)?.objectContent"></div>
+<div class="main-container">
+  <div class="spinner">
+    <div class="loading" *ngIf="uiService.isLoading$|async">Loading...</div>
+  </div>
+  <h3 class="object-name" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.name"></h3>
+  <div class="object-content" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.content">
+  </div>
+
+</div>

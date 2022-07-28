@@ -1,0 +1,13 @@
+.page-container {
+  padding: 0.5rem;
+  .header {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+  }
+  .content {
+  }
+  .close {
+    display: flex;
+    justify-content: end;
+  }
+}
