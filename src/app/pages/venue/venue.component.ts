@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ObjectService } from '../object/object.service';
+import { UiService } from '../../shared/ui.service';
 
 @Component({
   selector: 'app-venue',
@@ -9,7 +10,8 @@ import { ObjectService } from '../object/object.service';
 export class VenueComponent implements OnInit {
 
   constructor(
-    public objectService: ObjectService
+    public objectService: ObjectService,
+    public uiService: UiService
   ) { }
 
   ngOnInit(): void {

@@ -17,12 +17,15 @@ export class ObjectComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public objectService: ObjectService,
-    public uiService: UiService
+    public uiService: UiService,
   ) { }
 
   ngOnInit(): void {
     this.objectService.object$.subscribe((object: Object) => {
       console.log(object);
+    })
+    this.uiService.selectedLanguage$.subscribe((language: string) => {
+      console.log(language)
     })
   }
 

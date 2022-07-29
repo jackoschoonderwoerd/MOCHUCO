@@ -2,7 +2,6 @@
   <div class="venue-name" [innerHTML]="(objectService.venue$|async).name">
     <!-- {{(objectService.venue$|async).name}} -->
   </div>
-  <div class="venue-content" [innerHTML]="(objectService.venue$|async).content">
-    <!-- {{(objectService.venue$|async).content}} -->
-  </div>
+  <div class="venue-content" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.venue$|async).content_nl"></div>
+  <div class="venue-content" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.venue$|async).content_en"></div>
 </div>

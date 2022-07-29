@@ -2,11 +2,11 @@
   <div class="spinner">
     <div class="loading" *ngIf="uiService.isLoading$|async">Loading...</div>
   </div>
-  <h3 class="object-name" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.name"></h3>
+  <div class="object-name" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.name_nl"></div>
   <div class="img">
     <img [src]="(objectService.object$|async).imageUrl" alt="">
   </div>
-  <div class="object-content" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.content">
-  </div>
+  <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.object$|async)?.content_nl"></div>
+  <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.object$|async)?.content_en"></div>
 
 </div>

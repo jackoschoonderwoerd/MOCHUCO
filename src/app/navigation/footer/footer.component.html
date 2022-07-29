@@ -1,3 +1,17 @@
 <div class="main-container" *ngIf="!(scannerService.isScanning$|async)">
+  <ul class="flags">
+    <li
+      (click)="onSelectLanguage('nl')"
+      class="flag"
+      [ngClass]="(uiService.selectedLanguage$|async) === 'nl' ? 'language-selected' : ''">
+      <img src="./../../../assets/flags/flag_nl.png" alt="">
+    </li>
+    <li
+      (click)="onSelectLanguage('en')"
+      class="flag"
+      [ngClass]="(uiService.selectedLanguage$|async) === 'en' ? 'language-selected' : ''">
+      <img src="./../../../assets/flags/flag_en.png" alt="">
+    </li>
+  </ul>
   <button class="on-scanner" mat-raised-button (click)="onScanner()">scanner</button>
 </div>

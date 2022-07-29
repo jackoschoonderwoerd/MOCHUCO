@@ -1,17 +1,23 @@
 .main-container {
-  padding: 1rem;
-  background-color: white;
   height: 100%;
   .loading {
   }
   .object-name {
+    // border: 1px solid red;
+    padding: 1rem;
+    text-transform: capitalize;
+    font-size: 1.3rem;
   }
   .img {
     width: 100%;
+    // border: 1px solid black;
     img {
       width: 100%;
+      // border: 1px solid orange;
     }
   }
   .object-content {
+    // border: 1px solid green;
+    padding: 1rem;
   }
 }

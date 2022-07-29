@@ -26,7 +26,7 @@ export interface Object {
 }
 export interface Venue {
   name: string;
-  content: string;
+  contentNl: string;
   id?: string;
   objects: Object[]
 }
@@ -44,7 +44,7 @@ export class ObjectService {
   }
   venue: Venue = {
     name: '',
-    content: '',
+    contentNl: '',
     objects: []
   }
 
