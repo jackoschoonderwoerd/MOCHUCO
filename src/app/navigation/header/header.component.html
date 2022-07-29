@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
-  <div class="logo" (click)="onLogo()">LOGO</div>
+  <div class="logo" (click)="onLogo()">
+    <img src="./../../../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png" alt="">
+  </div>
   <div class="venue-name" (click)="onVenue()">{{(objectService.venue$|async).name}}</div>
 
 </mat-toolbar>

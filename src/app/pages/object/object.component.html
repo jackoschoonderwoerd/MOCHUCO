@@ -3,6 +3,9 @@
     <div class="loading" *ngIf="uiService.isLoading$|async">Loading...</div>
   </div>
   <h3 class="object-name" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.name"></h3>
+  <div class="img">
+    <img [src]="(objectService.object$|async).imageUrl" alt="">
+  </div>
   <div class="object-content" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.content">
   </div>
 
