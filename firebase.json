@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/qr_code_scanner",
+    "public": "dist/Mochuco",
     "ignore": [
       "firebase.json",
       "**/.*",

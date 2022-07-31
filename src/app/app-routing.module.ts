@@ -5,6 +5,7 @@ import { ScannerComponent } from './pages/scanner/scanner.component';
 
 import { ObjectComponent } from './pages/object/object.component';
 import { VenueComponent } from './pages/venue/venue.component';
+import { MochucoComponent } from './pages/mochuco/mochuco.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'scanner', component: ScannerComponent },
   { path: 'object', component: ObjectComponent },
-  { path: 'venue', component: VenueComponent }
+  { path: 'venue', component: VenueComponent },
+  { path: 'mochuco', component: MochucoComponent },
+  { path: 'admin/venue', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
 ];
 
 @NgModule({

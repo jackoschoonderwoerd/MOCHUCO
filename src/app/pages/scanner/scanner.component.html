@@ -1,32 +1,32 @@
-<div class="page-container" style="padding: 0%;">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-md-6 col-12r" #scanner>
-      <!-- ngx-scanner-qrcode -->
-      <!-- <ngx-scanner-qrcode #action="scanner" (data)="output = $event" (error)="onError($event)"></ngx-scanner-qrcode> -->
+<div class="page-container">
 
-      <ngx-scanner-qrcode #action="scanner" (data)="onData($event)" (error)="onError($event)"></ngx-scanner-qrcode>
+  <div class="scanner" #scanner>
+    <!-- ngx-scanner-qrcode -->
+    <!-- <ngx-scanner-qrcode #action="scanner" (data)="output = $event" (error)="onError($event)"></ngx-scanner-qrcode> -->
 
-      <!-- data  -->
+    <ngx-scanner-qrcode #action="scanner" (data)="onData($event)" (error)="onError($event)"></ngx-scanner-qrcode>
 
-      <p class="data">{{ output }}</p>
-      <a [href]="output">{{output}}</a>
+    <!-- data  -->
 
-      <!-- Loading -->
-      <p *ngIf="action.isLoading" class="text-light text-center">⌛ Loading...</p>
+    <p class="data">{{ output }}</p>
+    <a [href]="output">{{output}}</a>
 
-      <!-- toggleCamera -->
-      <div class="text-center">
-        <button id="cameraButton" (click)="action.toggleCamera()" class="btn"
-          [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart"
-          [disabled]="action.isLoading">
-          <img *ngIf="!action.isStart"
-            src="https://img.icons8.com/ios/50/000000/no-camera--v2.png"
-            width="30px" />
-          <img *ngIf="action.isStart"
-            src="https://img.icons8.com/ios/50/000000/no-camera--v1.png"
-            width="30px" />
-        </button>
-      </div>
+    <!-- Loading -->
+    <p *ngIf="action.isLoading" class="text-light text-center">⌛ Loading...</p>
+
+    <!-- toggleCamera -->
+    <div class="text-center">
+      <button id="cameraButton" (click)="action.toggleCamera()" class="btn"
+        [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart"
+        [disabled]="action.isLoading">
+        <img *ngIf="!action.isStart"
+          src="https://img.icons8.com/ios/50/000000/no-camera--v2.png"
+          width="30px" />
+        <img *ngIf="action.isStart"
+          src="https://img.icons8.com/ios/50/000000/no-camera--v1.png"
+          width="30px" />
+      </button>
     </div>
   </div>
+
 </div>

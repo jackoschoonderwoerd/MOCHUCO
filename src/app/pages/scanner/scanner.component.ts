@@ -14,7 +14,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
 
   @ViewChild('scanner') scanner: ElementRef<HTMLElement>
   @ViewChild('cameraButton') cameraButton: ElementRef<HTMLElement>
-  title = 'qr_code_scanner';
+  title = 'Mochuco';
   output!: string;
   isInApp: boolean = false;
 
@@ -58,24 +58,27 @@ export class ScannerComponent implements OnInit, OnDestroy {
   }
   onData(event: string) {
     console.log('scanner, onData(){} event: ', event)
-    this.uiService.isLoadingSubject.next(true);
-    const queryparamsStart = event.split('?')[1]
-    const queryparamsArray = queryparamsStart.split('&')
+    if (event) {
 
-    const objectId = queryparamsArray[0].split('=')[1];
-    const venueId = queryparamsArray[1].split('=')[1];
-    console.log(objectId, venueId)
-    // this.objectService.setVenue(venueId)
-    this.scannerService.isInApp$.subscribe((isInApp: boolean) => {
-      if (!isInApp) {
-        window.open(event); // => to app component
-        return;
-      } else {
-        // this.objectService.setObject(venueId, objectId, 'scanner component');
-        this.objectService.refreshObject(objectId);
-      }
-    })
-    this.scannerService.setIsScanning(false);
+      this.uiService.isLoadingSubject.next(true);
+      const queryparamsStart = event.split('?')[1]
+      const queryparamsArray = queryparamsStart.split('&')
+
+      const objectId = queryparamsArray[0].split('=')[1];
+      const venueId = queryparamsArray[1].split('=')[1];
+      console.log(objectId, venueId)
+      // this.objectService.setVenue(venueId)
+      this.scannerService.isInApp$.subscribe((isInApp: boolean) => {
+        if (!isInApp) {
+          window.open(event); // => to app component
+          return;
+        } else {
+          // this.objectService.setObject(venueId, objectId, 'scanner component');
+          this.objectService.refreshObject(objectId);
+        }
+      })
+      this.scannerService.setIsScanning(false);
+    }
   }
 
   ngOnDestroy(): void {

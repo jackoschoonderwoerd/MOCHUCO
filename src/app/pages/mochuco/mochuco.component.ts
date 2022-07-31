@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UiService } from '../../shared/ui.service';
 
 @Component({
   selector: 'app-mochuco',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MochucoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public uiService: UiService) { }
 
   ngOnInit(): void {
   }

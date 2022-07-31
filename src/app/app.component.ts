@@ -12,7 +12,7 @@ import { MochucoComponent } from './pages/mochuco/mochuco.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'qr_code_scanner';
+  title = 'Mochuco';
   output!: string;
 
   constructor(

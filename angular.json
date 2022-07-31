@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "qr_code_scanner": {
+    "Mochuco": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -42,7 +42,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/qr_code_scanner",
+            "outputPath": "dist/Mochuco",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -95,10 +95,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "qr_code_scanner:build:production"
+              "browserTarget": "Mochuco:build:production"
             },
             "development": {
-              "browserTarget": "qr_code_scanner:build:development"
+              "browserTarget": "Mochuco:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -106,7 +106,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "qr_code_scanner:build"
+            "browserTarget": "Mochuco:build"
           }
         },
         "test": {
@@ -134,7 +134,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "qr_code_scanner:build:production",
+            "browserTarget": "Mochuco:build:production",
             "firebaseProject": "mochuco-a185b",
             "firebaseHostingSite": "mochuco-a185b"
           }
@@ -142,5 +142,5 @@
       }
     }
   },
-  "defaultProject": "qr_code_scanner"
+  "defaultProject": "Mochuco"
 }

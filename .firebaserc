@@ -5,7 +5,7 @@
   "targets": {
     "mochuco-a185b": {
       "hosting": {
-        "qr_code_scanner": [
+        "Mochuco": [
           "mochuco-a185b"
         ]
       }
