@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UiService } from '../../shared/ui.service';
 import { Router } from '@angular/router';
+
 import {
   Firestore,
   addDoc,
@@ -18,18 +19,19 @@ import {
   orderBy,
   query
 } from '@angular/fire/firestore';
+import { Venue } from 'src/app/admin/admin.service';
 
-export interface Object {
+export interface MochucoObject {
   id?: string
-  name: string,
-  htmlContent: string
-}
-export interface Venue {
-  name: string;
+  nameNl: string;
+  nameEn: string;
   contentNl: string;
-  id?: string;
-  objects: Object[]
+  contentEn: string;
+  objectUrl?: string;
+  objectUrlDev?: string;
+
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,18 +40,25 @@ export interface Venue {
 
 export class ObjectService {
 
-  object: Object = {
-    name: '',
-    htmlContent: ''
+  object: MochucoObject = {
+    nameNl: '',
+    nameEn: '',
+    contentNl: '',
+    contentEn: '',
+    objectUrl: '',
+    objectUrlDev: ''
   }
   venue: Venue = {
-    name: '',
+    nameNl: '',
+    nameEn: '',
     contentNl: '',
+    contentEn: '',
     objects: []
   }
 
 
-  private objectSubject = new BehaviorSubject<Object>(this.object)
+
+  private objectSubject = new BehaviorSubject<MochucoObject>(this.object)
   object$ = this.objectSubject.asObservable()
 
   private objectNameSubject = new BehaviorSubject<string>('');
@@ -88,7 +97,7 @@ export class ObjectService {
   setVenueObjects(venueId: string) {
     console.log('venuservice 94', venueId)
     const venueRef = collection(this.fs, `venues/${venueId}/objects`);
-    collectionData(venueRef, { idField: 'id' }).subscribe((venueObjects: Object[]) => {
+    collectionData(venueRef, { idField: 'id' }).subscribe((venueObjects: MochucoObject[]) => {
       this.venue.objects = venueObjects
       console.log(this.venue)
     })
@@ -97,7 +106,7 @@ export class ObjectService {
   setObject(venueId: string, objectId: string, source: string) {
     console.log('service 69: setObject()', venueId, objectId, source);
     const objectRef = doc(this.fs, `venues/${venueId}/objects/${objectId}`);
-    docData(objectRef).subscribe((object: Object) => {
+    docData(objectRef).subscribe((object: MochucoObject) => {
       this.object = object;
       console.log('objectService 73', object);
       this.object = object;
@@ -109,12 +118,12 @@ export class ObjectService {
 
   refreshObject(objectId) {
     // console.log(this.venue, objectId)
-    const index = this.venue.objects.findIndex((object: Object) => {
+    const index = this.venue.objects.findIndex((object: MochucoObject) => {
       return object.id === objectId
     });
-    // console.log('index: ', index);
-    // console.log(this.venue.objects[index]);
-    const object: Object = this.venue.objects[index]
+
+    // const object: Object = this.venue.objects[index]
+    const object: any = this.venue.objects[index]
     console.log(object);
     this.objectSubject.next(object);
     this.uiService.setIsLoading(false);

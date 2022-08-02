@@ -9,15 +9,18 @@
     position: fixed;
     height: 60px;
     width: 100vw;
+    z-index: 100;
 
     max-width: 500px;
   }
   .router-outlet {
     padding-top: 56px;
     padding-bottom: 160px;
+    max-height: calc(100vh - 60px);
     width: 500px;
     max-width: 500px;
     background-color: white;
+    overflow: scroll;
   }
 
   .footer {

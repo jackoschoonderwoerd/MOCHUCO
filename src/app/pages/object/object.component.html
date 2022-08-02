@@ -1,12 +1,12 @@
-<div class="main-container">
+<div class="page-container">
   <div class="spinner">
     <div class="loading" *ngIf="uiService.isLoading$|async">Loading...</div>
   </div>
-  <div class="object-name" *ngIf="!(uiService.isLoading$|async)" [innerHTML]="(objectService.object$|async)?.name_nl"></div>
-  <div class="img">
-    <img [src]="(objectService.object$|async).imageUrl" alt="">
-  </div>
-  <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.object$|async)?.content_nl"></div>
-  <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.object$|async)?.content_en"></div>
-
-</div>
+  <div class="object-name" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.object$|async)?.nameNl"></div>
+  <div class="object-name" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.object$|async)?.nameEn"></div>
+  <!-- <div class="img">
+    <img *ngIf="(objectService.object$|async).imageUrl" [src]="(objectService.object$|async).imageUrl" alt="">
+  </div> -->
+  <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.object$|async)?.contentNl"></div>
+  <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.object$|async)?.contentEn"></div>
+  <!-- <div class="object">{{objectService.object$|async|json}}</div> -->

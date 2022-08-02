@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Object, ObjectService } from '../../pages/object/object.service';
+import { ObjectService } from '../../pages/object/object.service';
 import { Observable } from 'rxjs';
 import { ScannerService } from '../../pages/scanner/scanner.service';
 import { UiService } from '../../shared/ui.service';
@@ -17,9 +17,8 @@ export class HeaderComponent implements OnInit {
 
 
   // objectName: string;
-  objectData$: Observable<any>
-  object: Object;
-  object$: Observable<Object>
+
+
 
   constructor(
     private router: Router,

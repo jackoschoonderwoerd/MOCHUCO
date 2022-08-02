@@ -4,11 +4,11 @@
     <a routerLink="mochuco"><img src="./../../../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png" alt=""></a>
   </div>
   <div class="version">
-    Build-10
+    Build-11
   </div>
 
 
-  <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'nl'">{{(objectService.venue$|async).name_nl}}</div>
-  <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'en'">{{(objectService.venue$|async).name_en}}</div>
+  <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'nl'">{{(objectService.venue$|async)?.nameNl}}</div>
+  <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'en'">{{(objectService.venue$|async)?.nameEn}}</div>
 
 </mat-toolbar>

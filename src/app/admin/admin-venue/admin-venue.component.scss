@@ -1,0 +1,27 @@
+.page-container {
+  padding: 1rem;
+  // border: 3px solid red;
+  width: 100%;
+  display: flex;
+
+  form {
+    margin: auto;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    // border: 3px solid green;
+    .buttons {
+      .cancel_save {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        a {
+          text-decoration: none;
+          color: white;
+        }
+      }
+    }
+  }
+}

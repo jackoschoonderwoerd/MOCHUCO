@@ -1,0 +1,23 @@
+<div class="page-container">
+  <button mat-raised-button color="primary" (click)="onAdmin()">admin</button>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input type="text" matInput formControlName="nameNl" placeholder="name nl">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea rows="10" type="text" matInput formControlName="contentNl" placeholder="content nl"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput formControlName="nameEn" placeholder="name en">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea rows="10" type="text" matInput formControlName="contentEn" placeholder="content en"></textarea>
+    </mat-form-field>
+    <div class="buttons">
+      <button mat-raised-button color="primary" class="cancel"><a [routerLink]="['/admin/admin-objects', {venueId: venueId}]">cancel</a></button>
+      <button mat-raised-button color="primary" (click)="onAddObject()">{{editmode ? 'save edits' : 'add object'}}</button>
+    </div>
+
+  </form>
+</div>

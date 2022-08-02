@@ -19,6 +19,10 @@ import { AppMaterialModule } from './app-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { MochucoComponent } from './pages/mochuco/mochuco.component';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
+import { QRCodeModule } from 'angular2-qrcode';
 
 
 @NgModule({
@@ -34,12 +38,17 @@ import { MochucoComponent } from './pages/mochuco/mochuco.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgxScannerQrcodeModule,
     AppMaterialModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
+    QRCodeModule,
+
+
+
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       scope: './',
@@ -47,6 +56,8 @@ import { MochucoComponent } from './pages/mochuco/mochuco.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: environment.production,
     //   // Register the ServiceWorker as soon as the application is stable

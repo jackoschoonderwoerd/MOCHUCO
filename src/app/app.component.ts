@@ -20,14 +20,16 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     private objectService: ObjectService,
     private scannerService: ScannerService,
-    private dialog: MatDialog
+    // private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((queryParamMap: any) => {
       if (queryParamMap.params.venueId && queryParamMap.params.objectId) {
         const venueId = queryParamMap.params.venueId;
+        console.log('app.component 30 venueId: ', venueId);
         const objectId = queryParamMap.params.objectId;
+        console.log('app.component 32 objectId: ', objectId);
         this.objectService.setVenue(venueId)
         this.objectService.setObject(venueId, objectId, 'appComponent')
         this.objectService.setVenueObjects(venueId);
@@ -39,3 +41,4 @@ export class AppComponent implements OnInit {
     // })
   }
 }
+// http://localhost:4200//?objectId=null&venueId=47n1LrOgzXpoCoZXG3yq

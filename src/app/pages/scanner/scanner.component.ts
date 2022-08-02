@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ObjectService, Venue } from '../object/object.service';
+import { ObjectService } from '../object/object.service';
 import { ScannerService } from './scanner.service';
 import { UiService } from '../../shared/ui.service';
 
