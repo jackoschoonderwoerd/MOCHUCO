@@ -23,50 +23,53 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 
 import { QRCodeModule } from 'angular2-qrcode';
+import { TestComponent } from './pages/test/test.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    FooterComponent,
-    ScannerComponent,
-    VenueComponent,
-    ObjectComponent,
-    MochucoComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    NgxScannerQrcodeModule,
-    AppMaterialModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule,
-    QRCodeModule,
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HomeComponent,
+        FooterComponent,
+        ScannerComponent,
+        VenueComponent,
+        ObjectComponent,
+        MochucoComponent,
+        TestComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        NgxScannerQrcodeModule,
+        AppMaterialModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore()),
+        provideStorage(() => getStorage()),
+        BrowserAnimationsModule,
+        QRCodeModule,
 
 
 
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      scope: './',
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    provideAuth(() => getAuth()),
-    provideStorage(() => getStorage()),
-    // ServiceWorkerModule.register('ngsw-worker.js', {
-    //   enabled: environment.production,
-    //   // Register the ServiceWorker as soon as the application is stable
-    //   // or after 30 seconds (whichever comes first).
-    //   registrationStrategy: 'registerWhenStable:30000'
-    // }),
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            scope: './',
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        provideAuth(() => getAuth()),
+        provideStorage(() => getStorage()),
+        // ServiceWorkerModule.register('ngsw-worker.js', {
+        //   enabled: environment.production,
+        //   // Register the ServiceWorker as soon as the application is stable
+        //   // or after 30 seconds (whichever comes first).
+        //   registrationStrategy: 'registerWhenStable:30000'
+        // }),
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

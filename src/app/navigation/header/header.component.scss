@@ -1,18 +1,28 @@
 mat-toolbar {
-  display: flex;
-  justify-content: space-between;
-  .logo {
-    width: 2rem;
-    // border: 1px solid white;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    img {
-      // border: 1px solid red;
-      width: 100%;
+    justify-content: center;
+    .toolbar-content {
+        // border: 1px solid pink;
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        white-space: pre-wrap !important;
+        .logo {
+            width: 2rem;
+            // border: 1px solid white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img {
+                // border: 1px solid red;
+                width: 100%;
+            }
+        }
+        .venue-name {
+            text-transform: uppercase;
+            word-wrap: break-word;
+        }
     }
-  }
-  .venue-name {
-    text-transform: uppercase;
-  }
 }

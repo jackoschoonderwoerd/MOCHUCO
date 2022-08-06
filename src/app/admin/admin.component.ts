@@ -2,40 +2,50 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService, Venue } from './admin.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  public myAngularxQrCode: string = null;
-  venues$: Observable<Venue[]>
+    public myAngularxQrCode: string = null;
+    venues$: Observable<Venue[]>
 
-  constructor(
-    private adminService: AdminService,
-    private router: Router,
-  ) {
-    this.myAngularxQrCode = 'tutsmake.com';
-  }
+    constructor(
+        private adminService: AdminService,
+        private router: Router,
+        public authService: AuthService
+    ) {
+        this.myAngularxQrCode = 'tutsmake.com';
+    }
 
-  ngOnInit(): void {
-    this.venues$ = this.adminService.getVenues();
-    // this.adminService.getVenues().subscribe(data => console.log(data))
-  }
-  onDelete(id: string) {
-    console.log(id);
-    this.adminService.deleteVenue(id)
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-  }
-  onEdit(venueId: string) {
-    console.log(venueId);
-    this.router.navigate(['/admin/admin-venue', { id: venueId }]);
-  }
+    ngOnInit(): void {
+        this.venues$ = this.adminService.getVenues();
+        // this.adminService.getVenues().subscribe(data => console.log(data))
+    }
+    onDeleteVenue(id: string) {
+        console.log(id);
+        if (window.confirm('are you sure?')) {
+            this.adminService.deleteVenue(id)
+                .then(data => console.log(data))
+                .catch(err => console.log(err));
+        } else {
+            alert('nothing delete')
+        }
+    }
+    onEditVenue(venueId: string) {
+        // console.log(venueId);
+        this.router.navigate(['/admin/admin-venue', { id: venueId }]);
+    }
 
-  onAddVenue() {
-    this.router.navigateByUrl('admin/admin-venue');
-  }
+    onAddVenue() {
+        this.router.navigateByUrl('admin/admin-venue');
+    }
+    onLogOut() {
+        this.authService.logOut()
+    }
 
 }

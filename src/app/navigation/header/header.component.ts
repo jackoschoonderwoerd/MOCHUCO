@@ -7,6 +7,7 @@ import { UiService } from '../../shared/ui.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MochucoComponent } from '../../pages/mochuco/mochuco.component';
+import { AuthService } from '../../admin/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit {
     public objectService: ObjectService,
     private scannerServcive: ScannerService,
     public uiService: UiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public authService: AuthService
 
   ) { }
 

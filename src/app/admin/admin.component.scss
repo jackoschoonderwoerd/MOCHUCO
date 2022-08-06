@@ -1,34 +1,39 @@
 .page-container {
-  padding: 1rem;
-  .auth-buttons {
-    padding: 1rem 0;
-  }
-  .venues {
-    .header {
-      text-transform: uppercase;
-      font-size: 1.3rem;
+    width: 100vw;
+    max-width: 500px;
+    padding: 1rem;
+    .auth-buttons {
+        padding: 1rem 0;
     }
-    .venues-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      .venue {
-        padding: 0.5rem;
-        margin: 0.5rem 0;
-        border: 1px solid #ccc;
-        .delete_edit {
-          display: flex;
-          justify-content: space-between;
+    .venues {
+        width: 100%;
+        .header {
+            text-transform: uppercase;
+            font-size: 1.3rem;
         }
-      }
+        .venues-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            .venue {
+                padding: 0.5rem;
+                margin: 0.5rem 0;
+                border: 1px solid #ccc;
+                .delete_edit {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+        .cancel_add {
+            background-color: #ccc;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            a {
+                text-decoration: none;
+                color: white;
+            }
+        }
     }
-    .cancel_add {
-      display: flex;
-      justify-content: space-between;
-      a {
-        text-decoration: none;
-        color: white;
-      }
-    }
-  }
 }

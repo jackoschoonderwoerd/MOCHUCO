@@ -1,14 +1,17 @@
 <mat-toolbar color="primary">
-  <!-- <div class="logo" (click)="onLogo()"> -->
-  <div class="logo">
-    <a routerLink="mochuco"><img src="./../../../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png" alt=""></a>
-  </div>
-  <div class="version">
-    Build-11
-  </div>
+    <!-- <div class="logo" (click)="onLogo()"> -->
+    <div class="toolbar-content">
+        <div class="logo">
+            <a routerLink="mochuco"><img src="./../../../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png" alt=""></a>
+        </div>
+        <div class="version">V22</div>
+        <div class="user">{{(authService.mochucoUser$|async)?.email}}</div>
+        <div class="is-admin" *ngIf="authService.isAdmin$|async">A</div>
 
 
-  <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'nl'">{{(objectService.venue$|async)?.nameNl}}</div>
-  <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'en'">{{(objectService.venue$|async)?.nameEn}}</div>
+
+        <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'nl'">{{(objectService.venue$|async)?.nameNl}}</div>
+        <div class="venue-name" (click)="onVenue()" *ngIf="(uiService.selectedLanguage$|async) === 'en'">{{(objectService.venue$|async)?.nameEn}}</div>
+    </div>
 
 </mat-toolbar>

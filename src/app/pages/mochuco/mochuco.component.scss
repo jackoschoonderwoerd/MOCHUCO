@@ -1,19 +1,21 @@
 .page-container {
-  padding: 0.5rem;
-  .header {
-    text-transform: uppercase;
-    font-size: 1.2rem;
-  }
-  .admin {
-    a {
-      text-decoration: none;
-      color: white;
+    padding: 1rem;
+    width: 100%;
+    max-width: 500px;
+    .header {
+        text-transform: uppercase;
+        font-size: 1.2rem;
     }
-  }
-  .content {
-  }
-  .close {
-    display: flex;
-    justify-content: flex-end;
-  }
+    .admin {
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    }
+    .content {
+    }
+    .close {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

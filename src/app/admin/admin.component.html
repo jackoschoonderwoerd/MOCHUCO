@@ -2,28 +2,27 @@
 
 
 
-  <div class="auth-buttons">
-    <button mat-raised-button><a routerLink="signup">sign up</a></button>
-    <button mat-raised-button><a routerLink="login">log in</a></button>
-  </div>
-  <div>
-    <qr-code [value]="'All QR Code data goes here!'" [size]="150"></qr-code>
-  </div>
-  <div class="venues">
-    <div class="header">venues</div>
-    <ul class="venues-list">
-      <li class="venue" *ngFor="let venue of venues$|async">
-        {{venue.nameNl}}
-        <div class="delete_edit">
-          <button mat-raised-button color="warn" class="delete" (click)="onDelete(venue.id)">delete</button>
-          <button mat-raised-button color="primary" class="edit" (click)="onEdit(venue.id)">edit</button>
 
-        </div>
-      </li>
-    </ul>
-    <div class="cancel_add">
-      <button mat-raised-button color="primary" class="cancel"><a routerLink="/mochuco">cancel</a></button>
-      <button mat-raised-button color="primary" (click)="onAddVenue()">add venue</button>
+    <div class="auth-buttons">
+        <!-- <button *ngIf="!(authService.mochucoUser$|async)" mat-raised-button><a routerLink="signup">sign up</a></button> -->
+        <button *ngIf="!(authService.mochucoUser$|async)" mat-raised-button><a routerLink="login">log in</a></button>
+        <button *ngIf="(authService.mochucoUser$|async)" mat-raised-button (click)="onLogOut()"><a href="#">log out</a></button>
     </div>
-  </div>
+    <div *ngIf="(authService.mochucoUser$|async)" class="venues">
+        <div class="header">venues</div>
+        <ul class="venues-list">
+            <li class="venue" *ngFor="let venue of venues$|async">
+                {{venue.nameNl}}
+                <div class="delete_edit">
+                    <button mat-raised-button color="warn" class="delete" (click)="onDeleteVenue(venue.id)">delete</button>
+                    <button mat-raised-button color="primary" class="edit" (click)="onEditVenue(venue.id)">edit</button>
+
+                </div>
+            </li>
+        </ul>
+        <div class="cancel_add">
+            <button mat-raised-button color="primary" class="cancel"><a routerLink="/mochuco">back to mochuco</a></button>
+            <button mat-raised-button color="primary" (click)="onAddVenue()">add venue</button>
+        </div>
+    </div>
 </div>

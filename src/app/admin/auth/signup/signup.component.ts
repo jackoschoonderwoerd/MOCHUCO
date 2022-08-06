@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { User } from '../user.model';
+import { MochucoUser } from '../mochuco-user.model';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
   }
   onSignUp() {
     console.group(this.form.value)
-    const user: User = {
+    const user: MochucoUser = {
       email: this.form.value.email,
       password: this.form.value.password
     }

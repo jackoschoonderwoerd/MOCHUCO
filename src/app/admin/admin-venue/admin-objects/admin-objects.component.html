@@ -1,66 +1,82 @@
 <div class="page-container">
-  <button class="admin-button" mat-raised-button color="primary"><a routerLink="/admin">admin</a></button>
-  <div class="venue-name">objects for: <span>{{(venue$|async)?.nameNl}}</span></div>
-  <div class="objects">
-    <ul class="objects-list">
-      <li class="object" *ngFor="let object of objects$|async">
-        <div class="object-property name-nl">
-          <div class="property-name">name nl</div>{{object.nameNl}}
-        </div>
-        <div class="object-property content-nl content">
-          <div class="property-name">
-            content nl
-          </div> {{object.contentNl}}
-        </div>
-        <div class="object-property name-en">
-          <div class="property-name">name en</div> {{object.nameEn}}
-        </div>
-        <div class="object-property content-en content">
-          <div class="property-name">
-            content en
-          </div> {{object.contentEn}}
-        </div>
-        <div class="object-property object-url">
-          <div class="property-name">
-            object url live
-          </div>{{object.objectUrl}}
-          <div class="create-url">
 
-          </div>
-          <div class="qr">
-          </div>
+    <button class="admin-button" mat-raised-button color="primary"><a routerLink="/admin">admin</a></button>
+    <div class="venue-name">objects for: <span>{{(venue$|async)?.nameNl}}</span></div>
+    <div class="objects">
+        <ul class="objects-list">
+            <li class="object" *ngFor="let object of objects$|async">
+                <div class="name_delete_edit">
+                    <div class="name-nl">
+                        {{object.nameNl}}
+                    </div>
+                    <div class="buttons delete_edit">
+                        <button
+                            class="delete"
+                            mat-raised-button
+                            color="warn"
+                            (click)="onDeleteObject(object.id)">
+                            D
+                        </button>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            (click)="onEditObject(object.id)">
+                            E
+                        </button>
+                    </div>
+                </div>
+                <!-- REMOTE -->
+                <div class="images">
+                    <div class="thumbnail">
+                        <img [src]="object.imageUrl" alt="">
+                    </div>
+
+                    <div class="remote">
+                        <div class="url-remote">
+                            <a href="remote-link" [href]="object.objectUrl">remote</a>
+                        </div>
+                        <div class="qr-code-remote">
+                            <qr-code
+                                [value]="'https://mochuco-a185b.web.app/?site=mochuco&objectId='+
+                                object.id +
+                                '&venueId=' +
+                                venueId"
+                                [size]="150">
+                            </qr-code>
+                            <!-- <button
+                                mat-raised-button
+                                (click)="onDownloadQrCode(object.objectUrl, object.nameNl)">
+                                dowload qr code
+                            </button> -->
+                        </div>
+                    </div>
+                    <!-- DEV -->
+                    <div *ngIf="authService.isAdmin$|async" class="dev">
+                        <div class="url-dev">
+                            <a class="dev-link" [href]="object.objectUrlDev">dev</a>
+                        </div>
+                        <div class="qr-code-dev">
+                            <qr-code
+                                [value]="'http://localhost:4200//?site=mochuco&objectId=' +
+                                object.id +
+                                '&venueId=' +
+                                venueId"
+                                [size]="150">
+                            </qr-code>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+        <div *ngIf="venue" class="buttons cancel_add">
+
+            <button
+                mat-raised-button
+                color="primary">
+                <a [routerLink]="['/admin/admin-venue', {id: (venue$|async)?.id}]">back to venue {{venue.nameNl}}</a>
+            </button>
+            <button mat-raised-button color="primary" (click)="onAddObject()">add object to {{venue.nameNl}}</button>
         </div>
-        <div class="object-property">
-          <div class="property-name">
-            qr live
-          </div>
-          <!-- <qr-code [value]="'https://mochuco-a185b.web.app/?objectId=34ZFlRHEYrRSLTSH0xTo&venueId=jz5XychvTXkSYEMekBHg'" [size]="150"></qr-code> -->
-          <qr-code [value]="'https://mochuco-a185b.web.app/?objectId='+ object.id +'&venueId=' + venueId" [size]="150"></qr-code>
-        </div>
-        <div class="object-property object-url-dev">
-          <div class="property-name">
-            object url local
-          </div>{{object.objectUrlDev}}
-        </div>
-        <div class="object-property">
-          <div class="property-name">
-            qr dev local
-          </div>
-          <qr-code [value]="'http://localhost:4200//?objectId='+ object.id +'&venueId=' + venuId" [size]="150"></qr-code>
-        </div>
-        <div class="buttons delete_edit">
-          <button mat-raised-button color="warn" (click)="onDeleteObject(object.id)">delete object</button>
-          <button mat-raised-button color="primary" (click)="onEditObject(object.id)">edit object</button>
-        </div>
-      </li>
-    </ul>
-    <div class="buttons cancel_add">
-      <button mat-raised-button color="primary" (click)="onAddObject()">add object</button>
-      <button
-        mat-raised-button
-        color="primary">
-        <a [routerLink]="['/admin/admin-venue', {id: (venue$|async)?.id}]">cancel</a>
-      </button>
     </div>
-  </div>
 </div>

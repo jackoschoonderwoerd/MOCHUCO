@@ -1,20 +1,23 @@
-<div class="page-container">
-  <div class="header">
-    <div *ngIf="(uiService.selectedLanguage$|async) === 'nl'" class="header_nl">
-      over mochuco
+<div *ngIf="isLoading" class="page-container">
+    <div class="loading">Loading...</div>
+</div>
+<div *ngIf="!(isLoading)" class="page-container">
+    <div class="header">
+        <div *ngIf="(uiService.selectedLanguage$|async) === 'nl'" class="header_nl">
+            over mochuco
+        </div>
+        <div *ngIf="(uiService.selectedLanguage$|async) === 'en'" class="header_en">
+            about mochuco
+        </div>
     </div>
-    <div *ngIf="(uiService.selectedLanguage$|async) === 'en'" class="header_en">
-      about mochuco
+    <button mat-raised-button (click)="closeDialog()" color="primary" class="admin"><a routerLink="/admin">admin</a></button>
+    <div class="content">
+        <div *ngIf="(uiService.selectedLanguage$|async) === 'nl'" class="content_nl">
+            "Mochuco is een nieuwe mogelijkheid om makkelijk en snel meer te weten te komen over ons cultureel erfgoed. Veel van onze geschiedenis geeft waardevolle, leuke en interessante informatie. U herkent de Mochuco QRcodes aan het uiltje in het midden. Scan de code en u krijgt direct de informatie te zien.
+        </div>
+        <div *ngIf="(uiService.selectedLanguage$|async) === 'en'" class="content_en">English content</div>
     </div>
-  </div>
-  <button mat-raised-button color="primary" class="admin"><a routerLink="/admin">admin</a></button>
-  <div class="content">
-    <div *ngIf="(uiService.selectedLanguage$|async) === 'nl'" class="content_nl">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dolores consequatur voluptas magni, recusandae magnam placeat quis laudantium, quaerat, est nobis? Consequatur amet natus odit aspernatur fugiat, laboriosam eaque. Quisquam cupiditate maxime fuga officiis! Libero facilis voluptatem harum quasi, exercitationem fuga cum veritatis id, sequi nam quae nobis officiis recusandae. Accusantium maiores nemo ratione iusto rerum esse id suscipit quae error sit ullam voluptates repellat saepe, minima a, eius eveniet quaerat veritatis. Porro repudiandae nesciunt iusto ab aliquam quibusdam ipsum laborum modi laudantium magni. Voluptatem cupiditate, aliquid perspiciatis temporibus aspernatur ullam et sapiente dolores eius vitae fugiat id, obcaecati quod laboriosam voluptas molestiae illo nostrum officia magnam, omnis eos. Ut consequuntur magnam deserunt minima iste nisi repellendus similique. Aperiam cumque quaerat blanditiis possimus velit laboriosam, illo voluptate odit vel minus adipisci delectus, numquam error ducimus sunt eius. Reiciendis vero dolor repellat, dignissimos quae eius. Deleniti perferendis corporis magnam quo voluptatum.
+    <div class="close">
+        <!-- <button mat-raised-button (click)="closeDialog()">close</button> -->
     </div>
-    <div *ngIf="(uiService.selectedLanguage$|async) === 'en'" class="content_en">English content</div>
-  </div>
-  <!-- <div class="close">
-    <button mat-raised-button mat-dialog-close>close</button>
-  </div> -->
 </div>

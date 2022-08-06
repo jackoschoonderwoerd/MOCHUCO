@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { User } from '../user.model';
+import { MochucoUser } from '../mochuco-user.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,14 +29,14 @@ export class LoginComponent implements OnInit {
   }
   onLogIn() {
     console.group(this.form.value)
-    const user: User = {
+    const user: MochucoUser = {
       email: this.form.value.email,
       password: this.form.value.password
     }
     this.authService.logIn(user).subscribe(
-      data => {
-        console.log(data)
-        this.router.navigateByUrl('admin/admin-venue')
+      user => {
+        console.log(user)
+        this.router.navigateByUrl('admin')
       });
   }
 
