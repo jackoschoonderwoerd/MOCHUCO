@@ -1,52 +1,28 @@
-// h1,
-// h5,
-// p {
-//   word-break: break-all;
-//   font-family: "Courier New", Courier, monospace;
-// }
-// .page-container {
-//   // background-color: red;
-//   // height: 100vh;
-//   // width: 100vw;
-// }
-// div {
-//   button {
-//     display: none;
-//     border-radius: 50% !important;
-//     height: 60px;
-//     width: 60px;
-//     margin-bottom: 20px;
-//     &disabled {
-//       cursor: no-drop !important;
-//     }
-//   }
-
-//   .data {
-//     background: antiquewhite;
-//     border-radius: 5px;
-//   }
-// }
 .page-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  .scanner {
-    padding-top: 3rem;
-    height: 60%;
-    width: 90%;
-    ngx-scanner-qr-code {
-      // width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    .scanner {
+        // border: 1px solid blue;
+        padding-top: 3rem;
+        height: 100%;
+        width: 90%;
+        ngx-scanner-qr-code {
+            // width: 80%;
+        }
+        .data {
+        }
+        a {
+        }
+        .text-light {
+        }
+        .text-center {
+            // display: none;
+            .btn {
+            }
+        }
     }
-    .data {
-    }
-    a {
-    }
-    .text-light {
-    }
-    .text-center {
-      // display: none;
-      .btn {
-      }
-    }
-  }
 }

@@ -58,8 +58,9 @@ export class ScannerComponent implements OnInit, OnDestroy {
     }
     onData(event: string) {
         // this.uiService.setIsLoading(true);
-        console.log('scanner, onData(){} event: ', event)
         if (event) {
+            console.log('scanner, onData(){} event: ', event)
+            localStorage.setItem('last-visited', JSON.stringify(event))
             if (event.indexOf('mochuco') === -1) {
                 alert('not a mochuco url');
                 window.open(event);

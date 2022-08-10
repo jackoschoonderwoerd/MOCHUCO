@@ -1,12 +1,35 @@
-<div class="page-container">
-    <div class="spinner">
-        <div class="loading" *ngIf="uiService.isLoading$|async">Loading...</div>
+<div class="page-container">{{(objectService.object$|async).nameNl ? loadingObject() : notLoadingObject()}}
+    <!-- <div class="check-object"
+        *ngIf="(objectService.object$|async).nameNl; else noobject">object present</div> -->
+    <div class="object-name"
+        *ngIf="(uiService.selectedLanguage$|async) === 'nl'"
+        [innerHTML]="(objectService.object$|async)?.nameNl">
     </div>
-    <div class="object-name" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.object$|async)?.nameNl"></div>
-    <div class="object-name" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.object$|async)?.nameEn"></div>
+    <div class="object-name"
+        *ngIf="(uiService.selectedLanguage$|async) === 'en'"
+        [innerHTML]="(objectService.object$|async)?.nameEn">
+    </div>
+
+    <div class="spinner-container"
+        *ngIf="uiService.isLoadingImage$|async">
+        <mat-spinner></mat-spinner>
+    </div>
     <div class="img">
-        <img *ngIf="(objectService.object$|async).imageUrl" [src]="(objectService.object$|async).imageUrl" alt="">
+        <img [src]="(objectService.object$|async).imageUrl"
+            alt=""
+            (load)="imageLoad()">
     </div>
-    <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'nl'" [innerHTML]="(objectService.object$|async)?.contentNl"></div>
-    <div class="object-content" *ngIf="(uiService.selectedLanguage$|async) === 'en'" [innerHTML]="(objectService.object$|async)?.contentEn"></div>
-    <!-- <div class="object">{{objectService.object$|async|json}}</div> -->
+
+    <div class="object-content"
+        *ngIf="(uiService.selectedLanguage$|async) === 'nl'"
+        [innerHTML]="(objectService.object$|async)?.contentNl">
+    </div>
+    <div class="object-content"
+        *ngIf="(uiService.selectedLanguage$|async) === 'en'"
+        [innerHTML]="(objectService.object$|async)?.contentEn">
+    </div>
+    <div class="filler"></div>
+</div>
+<!-- <ng-template #noobject>
+    no object
+</ng-template> -->

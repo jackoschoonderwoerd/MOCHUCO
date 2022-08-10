@@ -1,16 +1,17 @@
 .page-container {
-  padding: 3rem 1rem 1rem 1rem;
-  // border: 3px solid red;
-  width: 100%;
-  display: flex;
-
-  form {
-    margin: auto;
-    justify-items: center;
+    padding: 3rem 1rem 1rem 1rem;
+    // border: 3px solid red;
+    max-width: 500px;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 350px;
-    // border: 3px solid green;
-  }
+
+    form {
+        margin: auto;
+        justify-items: center;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 350px;
+        // border: 3px solid green;
+    }
 }

@@ -22,7 +22,7 @@ export class AuthService {
     mochucoUser$: Observable<MochucoUser> = this.mochucoUserSubject.asObservable();
 
     private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-    public isLoggedIn = this.isLoggedInSubject.asObservable();
+    public isLoggedIn$ = this.isLoggedInSubject.asObservable();
     private isAdminSubject = new BehaviorSubject<boolean>(false);
     public isAdmin$ = this.isAdminSubject.asObservable();
 

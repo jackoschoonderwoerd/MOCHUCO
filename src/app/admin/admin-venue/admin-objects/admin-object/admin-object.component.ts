@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../admin.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -30,6 +30,8 @@ export class AdminObjectComponent implements OnInit {
     objectUrlDev: string;
     imageUrl: string;
     venueName: string;
+    mochucoObject: MochucoObject;
+    @ViewChild('img') img: any;
 
     ngOnInit(): void {
         this.initForm()
@@ -41,14 +43,15 @@ export class AdminObjectComponent implements OnInit {
             this.objectUrl = `https://mochuco-a185b.web.app/?site=mochuco&objectId=${this.objectId}&venueId=${this.venueId}`
             this.objectUrlDev = `http://localhost:4200//?site=mochuco&objectId=${this.objectId}&venueId=${this.venueId}`
             this.editmode = true;
-            this.adminService.getObject(this.venueId, this.objectId).subscribe((object: MochucoObject) => {
-                if (!object.imageUrl) {
-                    object.imageUrl = ''
+            this.adminService.getObject(this.venueId, this.objectId).subscribe((mochucoObject: MochucoObject) => {
+                this.mochucoObject = mochucoObject;
+                if (!mochucoObject.imageUrl) {
+                    mochucoObject.imageUrl = ''
                 }
                 this.form.setValue({
-                    ...object
+                    ...mochucoObject
                 });
-                this.imageUrl = object.imageUrl
+                this.imageUrl = mochucoObject.imageUrl
             })
         }
         console.log(this.editmode);
@@ -71,14 +74,38 @@ export class AdminObjectComponent implements OnInit {
     }
 
     onUploadImage(e) {
+
         const file = e.target.files[0]
         const filename = e.target.files[0].name.split('.')[0];
-        this.adminObjectService.uploadImage('myfolder', filename, file)
+        const filepath = `Mochuco/${this.venueName}` 
+        this.adminObjectService.uploadImage('Mochuco/' + this.venueName, '-img-' + filename + '-img-', file)
             .then((imageUrl: string) => {
                 console.log(imageUrl);
                 this.imageUrl = imageUrl
+                this.onAddObject();
             })
             .catch((err) => console.log(err));
+    }
+
+    onDeleteImage() {
+        if (confirm('this will delete the image from the database and storage')) {
+            const url: string = this.img.nativeElement.src.toString();
+            const fileName = '-img-' + url.split('-img-')[1] + '-img-' + '.jpg'
+            const path = `Mochuco/${this.venueName}/${fileName}`
+            this.adminObjectService.deleteImage(path)
+                .then(res => {
+                    console.log(res);
+                    this.mochucoObject.imageUrl = null;
+                    this.adminService.updateObject(this.venueId, this.mochucoObject)
+                        .then(res => {
+                            console.log(res)
+                        })
+                        .catch(err => console.log(err));
+                })
+                .catch(err => console.log(err));
+        } else {
+            alert('nothing deleted');
+        }
     }
 
     onAddObject() {

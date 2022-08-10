@@ -10,8 +10,6 @@ import { Observable } from 'rxjs';
 })
 export class MochucoComponent implements OnInit {
 
-    isLoading$: Observable<boolean>
-    isLoading: boolean = false;
 
     constructor(
         public uiService: UiService,
@@ -20,15 +18,11 @@ export class MochucoComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.isLoading$ = this.uiService.isLoading$
-        this.uiService.isLoading$.subscribe((status: boolean) => {
-            console.log(status)
-            this.isLoading = status;
-        })
-    }
-    closeDialog() {
-        // this.dialogRef.close();
-        // this.dialog.closeAll();
+        // this.isLoading$ = this.uiService.isLoading$
+        // this.uiService.isLoading$.subscribe((status: boolean) => {
+        //     console.log(status)
+        //     this.isLoading = status;
+        // })
     }
 
 }

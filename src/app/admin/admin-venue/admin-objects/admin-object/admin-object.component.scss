@@ -1,14 +1,22 @@
 .page-container {
     width: 100vw;
-    padding: 3rem;
+    padding: 1rem;
+    @media (min-width: 480px) {
+        padding: 3rem;
+    }
     .venue-name {
         padding: 0.3rem;
         background-color: #ccc;
         text-transform: uppercase;
     }
     .top {
-        display: flex;
+        // border: 1px solid red;
+        width: 100%;
+        // display: flex;
         justify-content: space-between;
+        @media (min-width: 700px) {
+            display: flex;
+        }
         .top-left {
             // border: 3px solid red;
             width: 100%;
@@ -39,14 +47,40 @@
                     width: 100%;
                 }
             }
+            .file-input {
+                margin-bottom: 1rem;
+            }
         }
     }
     .bottom {
         background-color: #ccc;
         padding: 1rem;
         .buttons {
-            display: flex;
-            justify-content: space-between;
+            @media (min-width: 620px) {
+                display: flex;
+                justify-content: space-between;
+            }
+            .cancel {
+                margin-bottom: 1rem;
+                @media (min-width: 620px) {
+                    margin-bottom: 0;
+                }
+            }
+            .add {
+                // @media (min-width: 620px) {
+                //     display: block;
+                // }
+            }
         }
     }
 }
+
+// @media (max-width: 480px) {}
+
+// @media (min-width: 481px) and (max-width: 767px) {}
+
+// @media (min-width: 768px) and (max-width: 1024px) {}
+
+// @media (min-width: 1025px) and (max-width: 1280px) {}
+
+// @media (min-width: 1281px) {}

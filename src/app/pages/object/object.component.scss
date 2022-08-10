@@ -10,16 +10,34 @@
 
         text-transform: capitalize;
         font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    .spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        mat-spinner {
+        }
     }
     .img {
         width: 100%;
-        // border: 1px solid black;
+        margin-bottom: 1rem;
+        mat-spinner {
+            margin: auto;
+        }
         img {
             width: 100%;
             // border: 1px solid orange;
         }
     }
     .object-content {
+        // text-align: justify;
+        // text-justify: inter-word;
+        margin-bottom: 1rem;
         // border: 1px solid green;
+    }
+    .filler {
+        height: 0.7em;
     }
 }

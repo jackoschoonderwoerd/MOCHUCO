@@ -1,0 +1,19 @@
+.page-container {
+    width: 100vw;
+    height: calc(100vh - 83px);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    .spinner {
+        margin-bottom: 3rem;
+    }
+    .img {
+        width: 150px;
+        img {
+            width: 100%;
+        }
+    }
+}

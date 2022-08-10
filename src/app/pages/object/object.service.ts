@@ -82,16 +82,16 @@ export class ObjectService {
 
     getObjectObservable(venueId: string, objectId: string) {
         // this.uiService.setIsLoading(true);
-        console.log('objectService 55: ', venueId, objectId)
+        // console.log('objectService 55: ', venueId, objectId)
         const objectRef = doc(this.fs, `venues/${venueId}/objects/${objectId}`)
         return docData(objectRef) as Observable<any>;
     }
 
     setVenue(venueId) {
-        console.log('object.service 106 setVenue(){}', venueId)
+        // console.log('object.service 106 setVenue(){}', venueId)
         const venueRef = doc(this.fs, `venues/${venueId}`)
         docData(venueRef).subscribe((venue: Venue) => {
-            console.log(venue);
+            // console.log(venue);
             this.venue = venue;
             this.venueSubject.next(venue);
         })
@@ -99,24 +99,25 @@ export class ObjectService {
 
 
     setVenueObjects(venueId: string) {
-        console.log('objectService 98', venueId)
+        // console.log('objectService 98', venueId)
         const venueRef = collection(this.fs, `venues/${venueId}/objects`);
         collectionData(venueRef, { idField: 'id' }).subscribe((venueObjects: MochucoObject[]) => {
             this.venue.objects = venueObjects
-            console.log(this.venue)
+            // console.log(this.venue)
         })
     }
 
     setObject(venueId: string, objectId: string, source: string) {
-        console.log('service 69: setObject()', venueId, objectId, source);
+        // console.log('service 69: setObject()', venueId, objectId, source);
         const objectRef = doc(this.fs, `venues/${venueId}/objects/${objectId}`);
         docData(objectRef).subscribe((object: MochucoObject) => {
             this.object = object;
-            console.log('objectService 73', object);
+            // console.log('objectService 73', object);
             this.object = object;
             this.objectSubject.next(object)
             this.uiService.setIsLoading(false);
             this.router.navigateByUrl('object');
+            this.uiService.setIsLoading(false);
         })
     }
 
@@ -128,7 +129,7 @@ export class ObjectService {
 
         // const object: Object = this.venue.objects[index]
         const object: any = this.venue.objects[index]
-        console.log(object);
+        // console.log(object);
         this.objectSubject.next(object);
         this.uiService.setIsLoading(false);
         this.router.navigateByUrl('object');

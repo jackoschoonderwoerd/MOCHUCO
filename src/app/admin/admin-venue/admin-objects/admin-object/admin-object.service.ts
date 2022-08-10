@@ -8,6 +8,7 @@ import {
     uploadBytesResumable,
     percentage,
     getDownloadURL,
+    getMetadata
 } from '@angular/fire/storage';
 
 @Injectable({
@@ -38,6 +39,7 @@ export class AdminObjectService {
                     // this.uploadPercent = percentage(task);
                     await task;
                     const url = await getDownloadURL(storageRef);
+                    
                     console.log(url)
                     return url;
                 } catch (e: any) {
@@ -46,4 +48,10 @@ export class AdminObjectService {
             }
         }
     }
+    deleteImage(filepath) {
+        const storageRef = ref(this.storage, filepath)
+        return deleteObject(storageRef)
+
+    }
+    removeImageFromDb() { }
 }

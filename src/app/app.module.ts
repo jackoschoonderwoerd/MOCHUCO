@@ -24,6 +24,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 
 import { QRCodeModule } from 'angular2-qrcode';
 import { TestComponent } from './pages/test/test.component';
+import { LogoComponent } from './pages/logo/logo.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TestComponent } from './pages/test/test.component';
         VenueComponent,
         ObjectComponent,
         MochucoComponent,
-        TestComponent
+        TestComponent,
+        LogoComponent
     ],
     imports: [
         BrowserModule,

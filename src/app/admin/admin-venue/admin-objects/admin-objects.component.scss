@@ -1,15 +1,18 @@
 .page-container {
     padding: 1rem;
     height: 100px;
-    .admin-button {
-        a {
-            text-decoration: none;
-            color: white;
-        }
-    }
-    .venue-name {
+    // .admin-button {
+    //     a {
+    //         text-decoration: none;
+    //         color: white;
+    //     }
+    // }
+    .admin-header {
         text-transform: uppercase;
-        font-size: 1.3rem;
+        background-color: #ccc;
+        padding: 0.3rem;
+        margin: 1rem 0;
+        // font-size: 1.3rem;
     }
     .objects {
         .objects-list {
@@ -17,27 +20,21 @@
             margin: 0;
             padding: 0;
             .object {
-                border: 1px solid #ccc;
+                border: 2px solid black;
                 padding: 0.5rem;
                 margin-bottom: 0.5rem;
-                .name_delete_edit {
+                .name {
                     background-color: #ccc;
-                    padding: 0.5rem;
-                    display: flex;
-                    justify-content: space-between;
-                    .name-nl {
-                        text-transform: uppercase;
-                        font-size: 1.3rem;
-                    }
-                    .delete {
-                        margin-right: 1rem;
-                    }
+                    padding: 0.3rem;
+                    text-transform: uppercase;
                 }
                 .images {
                     display: flex;
+                    justify-content: space-evenly;
+                    margin-bottom: 1rem;
                     .thumbnail {
                         padding: 1rem;
-                        width: 150px;
+                        width: 200px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -66,14 +63,25 @@
                         }
                     }
                 }
+                .delete_edit {
+                    background-color: #ccc;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0.5rem;
+                    .delete {
+                    }
+                }
             }
         }
-        .cancel_add {
+        .back_add {
             display: flex;
             justify-content: space-between;
-            a {
-                text-decoration: none;
-                color: white;
+            .back {
+                margin-right: 1rem;
+                a {
+                    text-decoration: none;
+                    color: white;
+                }
             }
         }
     }

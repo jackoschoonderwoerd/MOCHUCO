@@ -13,9 +13,12 @@
         }
     }
     .content {
+        margin-bottom: 1rem;
     }
-    .close {
-        display: flex;
-        justify-content: flex-end;
+    button {
+        a {
+            text-decoration: none;
+            color: white;
+        }
     }
 }

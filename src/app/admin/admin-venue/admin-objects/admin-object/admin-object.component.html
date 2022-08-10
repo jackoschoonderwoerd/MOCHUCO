@@ -1,5 +1,6 @@
 <div class="page-container">
-    <div *ngIf="venueName" class="venue-name">
+    <div *ngIf="venueName"
+        class="venue-name">
         {{venueName}} - object
     </div>
     <div class="top">
@@ -8,32 +9,63 @@
             <!-- <button mat-raised-button color="primary" (click)="onAdmin()">admin</button> -->
             <form [formGroup]="form">
                 <mat-form-field>
-                    <input type="text" matInput formControlName="nameNl" placeholder="name nl">
+                    <input type="text"
+                        matInput
+                        formControlName="nameNl"
+                        placeholder="name nl">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea rows="5" type="text" matInput formControlName="contentNl" placeholder="content nl"></textarea>
+                    <textarea rows="5"
+                        type="text"
+                        matInput
+                        formControlName="contentNl"
+                        placeholder="content nl"></textarea>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input type="text" matInput formControlName="nameEn" placeholder="name en">
+                    <input type="text"
+                        matInput
+                        formControlName="nameEn"
+                        placeholder="name en">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea rows="5" type="text" matInput formControlName="contentEn" placeholder="content en"></textarea>
+                    <textarea rows="5"
+                        type="text"
+                        matInput
+                        formControlName="contentEn"
+                        placeholder="content en"></textarea>
                 </mat-form-field>
 
             </form>
         </div>
         <div class="top-right">
-            <div *ngIf="imageUrl" class="preview">
-                <img [src]="imageUrl" alt="">
+            <div *ngIf="imageUrl"
+                class="preview">
+                <img #img
+                    [src]="imageUrl"
+                    alt="">
             </div>
-            <input class="file-input" type="file" (change)="onUploadImage($event)">
+
+            <input class="file-input"
+                type="file"
+                (change)="onUploadImage($event)">
+            <button class="delete-image"
+                *ngIf="mochucoObject?.imageUrl"
+                mat-raised-button
+                color="warn"
+                (click)="onDeleteImage()">delete image</button>
         </div>
     </div>
     <div class="bottom">
         <div class="buttons">
-            <button mat-raised-button color="primary" class="cancel" [routerLink]="['/admin/admin-objects', {venueId: venueId}]">back to objects {{venueName}}</button>
-            <button mat-raised-button color="primary" (click)="onAddObject()">{{editmode ? 'save edits' : 'add object'}}</button>
+            <button mat-raised-button
+                color="primary"
+                class="cancel"
+                [routerLink]="['/admin/admin-objects', {venueId: venueId}]">back to <span class="button-highlight">objects</span> {{venueName}}</button>
+            <button mat-raised-button
+                class="add"
+                color="primary"
+                (click)="onAddObject()">{{editmode ? 'save edits' : 'add object'}}</button>
         </div>
     </div>
 </div>

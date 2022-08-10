@@ -1,63 +1,48 @@
 <div class="page-container">
 
-    <button class="admin-button" mat-raised-button color="primary"><a routerLink="/admin">admin</a></button>
-    <div class="venue-name">objects for: <span>{{(venue$|async)?.nameNl}}</span></div>
+    <!-- <button class="admin-button"
+        mat-raised-button
+        color="primary"><a routerLink="/admin">admin</a></button> -->
+    <div class="admin-header">objects&nbsp;<span>{{(venue$|async)?.nameNl}}</span></div>
     <div class="objects">
         <ul class="objects-list">
-            <li class="object" *ngFor="let object of objects$|async">
-                <div class="name_delete_edit">
-                    <div class="name-nl">
-                        {{object.nameNl}}
-                    </div>
-                    <div class="buttons delete_edit">
-                        <button
-                            class="delete"
-                            mat-raised-button
-                            color="warn"
-                            (click)="onDeleteObject(object.id)">
-                            D
-                        </button>
-                        <button
-                            mat-raised-button
-                            color="primary"
-                            (click)="onEditObject(object.id)">
-                            E
-                        </button>
-                    </div>
+            <li class="object"
+                *ngFor="let object of objects$|async">
+                <div class="name">
+
+                    {{object.nameNl}}
+
                 </div>
                 <!-- REMOTE -->
                 <div class="images">
                     <div class="thumbnail">
-                        <img [src]="object.imageUrl" alt="">
+                        <img [src]="object.imageUrl"
+                            alt="">
                     </div>
 
                     <div class="remote">
                         <div class="url-remote">
-                            <a href="remote-link" [href]="object.objectUrl">remote</a>
+                            <a href="remote-link"
+                                [href]="object.objectUrl">remote</a>
                         </div>
                         <div class="qr-code-remote">
-                            <qr-code
-                                [value]="'https://mochuco-a185b.web.app/?site=mochuco&objectId='+
+                            <qr-code [value]="'https://mochuco-a185b.web.app/?site=mochuco&objectId='+
                                 object.id +
                                 '&venueId=' +
                                 venueId"
                                 [size]="150">
                             </qr-code>
-                            <!-- <button
-                                mat-raised-button
-                                (click)="onDownloadQrCode(object.objectUrl, object.nameNl)">
-                                dowload qr code
-                            </button> -->
                         </div>
                     </div>
                     <!-- DEV -->
-                    <div *ngIf="authService.isAdmin$|async" class="dev">
+                    <div *ngIf="authService.isAdmin$|async"
+                        class="dev">
                         <div class="url-dev">
-                            <a class="dev-link" [href]="object.objectUrlDev">dev</a>
+                            <a class="dev-link"
+                                [href]="object.objectUrlDev">dev</a>
                         </div>
                         <div class="qr-code-dev">
-                            <qr-code
-                                [value]="'http://localhost:4200//?site=mochuco&objectId=' +
+                            <qr-code [value]="'http://localhost:4200//?site=mochuco&objectId=' +
                                 object.id +
                                 '&venueId=' +
                                 venueId"
@@ -66,17 +51,36 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="buttons delete_edit">
+                    <button class="delete"
+                        mat-raised-button
+                        color="warn"
+                        (click)="onDeleteObject(object.id)">
+                        delete object
+                    </button>
+                    <button mat-raised-button
+                        color="primary"
+                        (click)="onEditObject(object.id)">
+                        edit object
+                    </button>
+                </div>
             </li>
         </ul>
-        <div *ngIf="venue" class="buttons cancel_add">
 
-            <button
-                mat-raised-button
+        <div *ngIf="venue"
+            class="buttons back_add">
+
+            <button mat-raised-button
+                class="back"
                 color="primary">
-                <a [routerLink]="['/admin/admin-venue', {id: (venue$|async)?.id}]">back to venue {{venue.nameNl}}</a>
+                <a [routerLink]="['/admin/admin-venue', {id: (venue$|async)?.id}]">
+                    back to<span class="button-highlight">&nbsp;venue&nbsp;</span>{{venue.nameNl}}
+                </a>
             </button>
-            <button mat-raised-button color="primary" (click)="onAddObject()">add object to {{venue.nameNl}}</button>
+            <button mat-raised-button
+                class="add"
+                color="primary"
+                (click)="onAddObject()">add<span class="button-highlight">&nbsp;object&nbsp;</span>to {{venue.nameNl}}</button>
         </div>
     </div>
 </div>

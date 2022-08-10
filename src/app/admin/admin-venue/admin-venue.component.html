@@ -1,34 +1,61 @@
-<button mat-raised-button><a routerLink="/admin">admin</a></button>
+<!-- <button mat-raised-button><a routerLink="/admin">admin</a></button> -->
 <div class="page-container">
+    <div class="admin-header">
+        <span>venue&nbsp;</span>{{venue.nameNl}}
+    </div>
     <form [formGroup]="form">
         <mat-form-field>
-            <input matInput type="text" formControlName="nameNl" placeholder="name nl" maxlength="20">
+            <input matInput
+                type="text"
+                formControlName="nameNl"
+                placeholder="name nl"
+                maxlength="20">
 
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" formControlName="nameEn" placeholder="name en">
+            <input matInput
+                type="text"
+                formControlName="nameEn"
+                placeholder="name en">
         </mat-form-field>
-
         <mat-form-field>
-
-            <textarea rows="7" matInput formControlName="contentNl" placeholder="content nl">
+            <textarea rows="7"
+                matInput
+                formControlName="contentNl"
+                placeholder="content nl">
 
       </textarea>
         </mat-form-field>
         <mat-form-field>
-            <textarea rows="7" matInput formControlName="contentEn" placeholder="content en">
-
+            <textarea rows="7"
+                matInput
+                formControlName="contentEn"
+                placeholder="content en">
       </textarea>
         </mat-form-field>
     </form>
     <div class="buttons">
         <div class="cancel_save_show-objects">
             <div class="cancel_save">
-                <button color="primary" class="cancel" mat-raised-button><a routerLink="/admin">back to all venues</a></button>
-                <button class="edit" color="primary" mat-raised-button (click)="onAddVenue()">{{editmode ? 'save edits' : 'add venue'}}</button>
+                <button color="primary"
+                    class="cancel"
+                    mat-raised-button>
+                    <a routerLink="/admin">
+                        back to all
+                        <span class="button-highlight">venues</span>
+                    </a>
+                </button>
+                <button class="edit"
+                    color="primary"
+                    mat-raised-button
+                    (click)="onAddVenue()">{{editmode ? 'save edits' : 'add venue'}}</button>
             </div>
-            <div *ngIf="venue" class="show-objects">
-                <button class="show-objects-btn" mat-raised-button color="primary" (click)="onObjects()">show {{venue?.nameNl}} objects</button>
+            <div *ngIf="venue"
+                class="show-objects">
+                <button class="show-objects-btn"
+                    mat-raised-button
+                    color="primary"
+                    (click)="onObjects()">show <span class="button-highlight">objects</span> {{venue?.nameNl}} </button>
             </div>
         </div>
     </div>

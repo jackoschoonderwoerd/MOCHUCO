@@ -7,9 +7,11 @@
     }
     .venues {
         width: 100%;
-        .header {
+        .admin-header {
             text-transform: uppercase;
-            font-size: 1.3rem;
+            background-color: #ccc;
+            padding: 0.3rem;
+            margin: 1rem 0;
         }
         .venues-list {
             list-style: none;
