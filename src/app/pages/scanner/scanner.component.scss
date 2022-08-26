@@ -1,17 +1,19 @@
 .page-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    background-color: white;
+    margin: auto;
     width: 100%;
     max-width: 500px;
-    height: 100%;
+    padding: 1rem;
+    min-height: 100%;
     .scanner {
         // border: 1px solid blue;
         padding-top: 3rem;
+        margin: auto;
         height: 100%;
         width: 90%;
         ngx-scanner-qr-code {
             // width: 80%;
+            height: 100px;
         }
         .data {
         }

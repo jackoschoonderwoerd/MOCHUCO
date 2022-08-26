@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { ThisReceiver } from '@angular/compiler';
+import { ObjectService } from '../pages/object/object.service';
 
 @Component({
     selector: 'app-admin',
@@ -17,7 +18,8 @@ export class AdminComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private router: Router,
-        public authService: AuthService
+        public authService: AuthService,
+        private objectService: ObjectService
     ) {
         this.myAngularxQrCode = 'tutsmake.com';
     }
@@ -38,7 +40,9 @@ export class AdminComponent implements OnInit {
     }
     onEditVenue(venueId: string) {
         // console.log(venueId);
+        this.objectService.setVenue(venueId);
         this.router.navigate(['/admin/admin-venue', { id: venueId }]);
+
     }
 
     onAddVenue() {

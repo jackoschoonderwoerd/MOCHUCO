@@ -14,6 +14,12 @@ import { AdminObjectComponent } from './admin-venue/admin-objects/admin-object/a
 import { AdminObjectsComponent } from './admin-venue/admin-objects/admin-objects.component';
 // https://www.npmjs.com/package/angular2-qrcode
 import { QRCodeModule } from 'angular2-qrcode';
+import { AdminObjectsListItemComponent } from './admin-venue/admin-objects/admin-objects-list-item/admin-objects-list-item.component';
+import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
+
+
+
+
 
 
 
@@ -23,23 +29,25 @@ import { QRCodeModule } from 'angular2-qrcode';
 
 
 @NgModule({
-  declarations: [
-    AdminComponent,
-    SignupComponent,
-    AdminVenueComponent,
-    LoginComponent,
-    AdminObjectComponent,
-    AdminObjectsComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    ReactiveFormsModule,
-    AdminMaterialModule,
-    QRCodeModule
+    declarations: [
+        AdminComponent,
+        SignupComponent,
+        AdminVenueComponent,
+        LoginComponent,
+        AdminObjectComponent,
+        AdminObjectsComponent,
+        AdminObjectsListItemComponent
+    ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        ReactiveFormsModule,
+        AdminMaterialModule,
+        QRCodeModule,
+        NgxQrcodeStylingModule
 
 
 
-  ]
+    ]
 })
 export class AdminModule { }

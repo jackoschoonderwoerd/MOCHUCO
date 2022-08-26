@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, take } from 'rxjs';
 import { UiService } from '../../shared/ui.service';
 import { Router } from '@angular/router';
 
@@ -17,9 +17,17 @@ import {
     DocumentReference,
     setDoc,
     orderBy,
-    query
+    query,
+    getDoc,
+    docSnapshots,
+    where,
+    collectionSnapshots,
 } from '@angular/fire/firestore';
+
 import { Venue } from 'src/app/admin/admin.service';
+import { ImageUploadData } from '../../admin/admin-venue/admin-objects/admin-object/admin-object.service';
+import { AdminService } from '../../admin/admin.service';
+import { getLocaleDateFormat } from '@angular/common';
 
 export interface MochucoObject {
     id?: string
@@ -30,6 +38,8 @@ export interface MochucoObject {
     objectUrl?: string;
     objectUrlDev?: string;
     imageUrl?: string
+    imageUploadData?: ImageUploadData;
+    timesVisitedId?: string;
 
 }
 
@@ -48,7 +58,12 @@ export class ObjectService {
         contentEn: '',
         objectUrl: '',
         objectUrlDev: '',
-        imageUrl: ''
+        imageUrl: '',
+        imageUploadData: {
+            imageUrl: '',
+            imageStoragePath: ''
+        },
+        timesVisitedId: ''
     }
     venue: Venue = {
         nameNl: '',
@@ -61,36 +76,50 @@ export class ObjectService {
 
 
 
-    private objectSubject = new BehaviorSubject<MochucoObject>(this.object)
-    object$ = this.objectSubject.asObservable()
+    private timesVisitedSubject = new BehaviorSubject<number>(0);
+    timesVisited$ = this.timesVisitedSubject.asObservable()
 
-    private objectNameSubject = new BehaviorSubject<string>('');
-    objectId$ = this.objectNameSubject.asObservable();
+    private objectSubject = new BehaviorSubject<MochucoObject>(this.object);
+    object$ = this.objectSubject.asObservable();
 
-    private venueIdSubject = new BehaviorSubject<string>('')
+    private objectIdSubject = new BehaviorSubject<string>('');
+    objectId$ = this.objectIdSubject.asObservable()
+
+    // private objectNameSubject = new BehaviorSubject<string>('');
+    // objectId$ = this.objectNameSubject.asObservable();
+
+    private venueIdSubject = new BehaviorSubject<string>('');
     venueId$ = this.venueIdSubject.asObservable();
 
     private venueSubject = new BehaviorSubject<Venue>(this.venue)
     venue$ = this.venueSubject.asObservable();
+
+    // private timesVisitedSubject = new BehaviorSubject<number>(0)
 
 
 
     constructor(
         private fs: Firestore,
         private uiService: UiService,
-        private router: Router) { }
+        private router: Router,
+        private adminService: AdminService) { }
 
     getObjectObservable(venueId: string, objectId: string) {
+        console.log('getting object observable')
         // this.uiService.setIsLoading(true);
-        // console.log('objectService 55: ', venueId, objectId)
+
+        // INCREASE COUNTER
+
+
         const objectRef = doc(this.fs, `venues/${venueId}/objects/${objectId}`)
         return docData(objectRef) as Observable<any>;
     }
 
     setVenue(venueId) {
+        this.venueIdSubject.next(venueId)
         // console.log('object.service 106 setVenue(){}', venueId)
         const venueRef = doc(this.fs, `venues/${venueId}`)
-        docData(venueRef).subscribe((venue: Venue) => {
+        docData(venueRef, { idField: 'id' }).subscribe((venue: Venue) => {
             // console.log(venue);
             this.venue = venue;
             this.venueSubject.next(venue);
@@ -99,6 +128,7 @@ export class ObjectService {
 
 
     setVenueObjects(venueId: string) {
+
         // console.log('objectService 98', venueId)
         const venueRef = collection(this.fs, `venues/${venueId}/objects`);
         collectionData(venueRef, { idField: 'id' }).subscribe((venueObjects: MochucoObject[]) => {
@@ -108,18 +138,67 @@ export class ObjectService {
     }
 
     setObject(venueId: string, objectId: string, source: string) {
+        this.objectIdSubject.next(objectId);
         // console.log('service 69: setObject()', venueId, objectId, source);
         const objectRef = doc(this.fs, `venues/${venueId}/objects/${objectId}`);
         docData(objectRef).subscribe((object: MochucoObject) => {
             this.object = object;
-            // console.log('objectService 73', object);
-            this.object = object;
+            console.log(object)
             this.objectSubject.next(object)
-            this.uiService.setIsLoading(false);
             this.router.navigateByUrl('object');
             this.uiService.setIsLoading(false);
+            this.adminService.registerVisit(venueId, objectId)
+            // this.getTimesVisited(objectId)/
         })
+
     }
+    // increaseTimesVisited(venueId: string, objectId: string) {
+    //     this.getTimesVisitedId(venueId, objectId).subscribe((data: any) => {
+    //         console.log(data)
+    //         let visited = data.visited
+    //         const newVisited = visited + 1
+    //         // INCREASE VISITED
+    //         this.timesVisitedSubject.next(newVisited);
+    //         this.registerVisit(venueId, objectId)
+    //             .then(res => console.log('visit registerd'))
+    //             .catch(err => console.log('visit NOT registered', err));
+    // const scoreRef = doc(this.fs, `/venues/${venueId}/score/${objectId}`);
+    // const myObject = { visited: newVisited }
+    // updateDoc(scoreRef, myObject)
+    //     .then(res => {
+    //         console.log(res);
+    //         this.registerVisit(venueId, objectId)
+    //             .then(res => console.log('visit registered'))
+    //             .catch(err => console.log('visit registration failed', err));
+    //     })
+    //     .catch(err => console.log(err))
+    //     })
+    // }
+
+    // registerVisit(venueId, objectId) {
+    //     const registerObject = {
+    //         timestamp: new Date()
+    //     }
+    //     const registerRef = collection(this.fs, `venues/${venueId}/objects/${objectId}/visits`);
+    //     return addDoc(registerRef, registerObject)
+    // }
+
+    // getTimesVisitedId(venueId, objectId) {
+    //     console.log(venueId, objectId)
+    //     const scoreRef = doc(this.fs, `/venues/${venueId}/score/${objectId}`);
+    //     return docSnapshots(scoreRef)
+    //         .pipe(
+    //             take(1),
+    //             map(data => {
+    //                 const id = data.id
+    //                 const docData = data.data()
+    //                 return ({ ...docData, id })
+    //             })
+    //         )
+    // }
+
+
+
 
     refreshObject(objectId) {
         // console.log(this.venue, objectId)

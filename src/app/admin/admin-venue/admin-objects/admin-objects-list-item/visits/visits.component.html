@@ -1,0 +1,39 @@
+<div class="page-container">
+    <div class="header">
+        <div class="venue-name">
+            venue:&nbsp; <span>
+                {{(venue$|async)?.nameNl}}
+            </span>
+        </div>
+        <div class="mochuco-object-name">
+            object:&nbsp; <span>
+                {{(mochucoObject$|async)?.nameNl}}
+            </span>
+        </div>
+    </div>
+    <ul class="times-visited">
+        <li *ngFor="let visit of visits$|async">
+            <div class="full-date">
+                {{visit.timestamp|date:'fullDate'}}
+            </div>
+            <div class="short-time_delete-visit">
+                <div class="short-time">
+                    {{visit.timestamp|date:'shortTime'}}
+                </div>
+                <button class="button delete-visit"
+                    mat-raised-button
+                    color="warn"
+                    (click)="onDeleteVisit(visit.id)">
+                    delete visit
+                </button>
+            </div>
+        </li>
+    </ul>
+    <div class="button-container">
+        <button (click)="onBackToObject()"
+            mat-raised-button
+            color="primary">
+            back to<span class="button-highlight">&nbsp;venue</span>&nbsp;{{(venue$|async)?.nameNl}}
+        </button>
+    </div>
+</div>

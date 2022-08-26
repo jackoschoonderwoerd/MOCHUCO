@@ -11,9 +11,16 @@ import {
     getMetadata
 } from '@angular/fire/storage';
 
+export class ImageUploadData {
+    imageUrl: string;
+    imageStoragePath: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
+
+
 export class AdminObjectService {
 
     constructor(
@@ -24,13 +31,15 @@ export class AdminObjectService {
         folder: string,
         filename: string,
         file: File | null
-    ): Promise<string> {
-        console.log(file.name)
-        console.log(folder, filename, file);
+    ): Promise<ImageUploadData> {
+        // console.log(file.name)
+        // console.log(folder, filename, file);
 
         const ext = file!.name.split('.').pop();
 
         const path = `${folder}/${filename}.${ext}`; {
+
+            // console.log(path);
 
             if (file) {
                 try {
@@ -39,9 +48,17 @@ export class AdminObjectService {
                     // this.uploadPercent = percentage(task);
                     await task;
                     const url = await getDownloadURL(storageRef);
-                    
-                    console.log(url)
-                    return url;
+                    const metadata = await getMetadata(storageRef);
+
+                    // console.log(url)
+                    // console.log(metadata.fullPath)
+
+                    const imageUploadData: ImageUploadData = {
+                        imageUrl: url,
+                        imageStoragePath: metadata.fullPath
+                    }
+                    // return url;
+                    return imageUploadData
                 } catch (e: any) {
                     console.error(e);
                 }
@@ -54,4 +71,6 @@ export class AdminObjectService {
 
     }
     removeImageFromDb() { }
+
+
 }

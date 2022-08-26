@@ -5,9 +5,11 @@
 
     <div class="auth-buttons">
         <!-- <button *ngIf="!(authService.mochucoUser$|async)" mat-raised-button><a routerLink="signup">sign up</a></button> -->
-        <button *ngIf="!(authService.mochucoUser$|async)"
+        <button color="primary"
+            *ngIf="!(authService.mochucoUser$|async)"
             mat-raised-button><a routerLink="login">log in</a></button>
-        <button *ngIf="(authService.mochucoUser$|async)"
+        <button color="primary"
+            *ngIf="(authService.mochucoUser$|async)"
             mat-raised-button
             (click)="onLogOut()"><a href="#">log out</a></button>
     </div>
@@ -17,7 +19,10 @@
         <ul class="venues-list">
             <li class="venue"
                 *ngFor="let venue of venues$|async">
-                {{venue.nameNl}}
+                <div class="name">
+                    {{venue.nameNl}}
+                </div>
+
                 <div class="delete_edit">
                     <button mat-raised-button
                         color="warn"

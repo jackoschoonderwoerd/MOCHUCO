@@ -1,9 +1,10 @@
 mat-toolbar {
     display: flex;
     justify-content: center;
-    background-color: red !important;
+    // background-color: red !important;
     .toolbar-content {
         // background-color: orange;
+        padding: 0 1rem;
         // border: 1px solid pink;
         width: 100%;
         max-width: 500px;
@@ -11,6 +12,7 @@ mat-toolbar {
         justify-content: space-between;
         width: 100%;
         white-space: pre-wrap !important;
+        font-size: 1rem;
         .logo {
             width: 2rem;
             // border: 1px solid white;
@@ -24,11 +26,12 @@ mat-toolbar {
             }
         }
         .user {
-            border: 1px solid red;
+            // border: 1px solid red;
         }
         .isAdmin {
         }
         .venue-name {
+            cursor: pointer;
             text-transform: uppercase;
             word-wrap: break-word;
         }

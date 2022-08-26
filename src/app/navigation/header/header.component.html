@@ -2,22 +2,40 @@
     <!-- <div class="logo" (click)="onLogo()"> -->
     <div class="toolbar-content">
         <div class="logo">
-            <a routerLink="mochuco"><img src="./../../../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png"
-                    alt=""></a>
+            <a routerLink="mochuco">
+                <img src="./../../../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png"
+                    alt="">
+            </a>
         </div>
-        <div class="version">V27</div>
-        <div class="user">{{(authService.mochucoUser$|async)?.email.split('@')[0]}}</div>
+        <div class="version">
+            V37
+        </div>
+        <div class="user"
+            *ngIf="authService.mochucoUser$|async">
+            {{(authService.mochucoUser$|async)?.email.split('@')[0]}}
+        </div>
         <div class="is-admin"
             *ngIf="authService.isAdmin$|async">A</div>
 
 
-
         <div class="venue-name"
             (click)="onVenue()"
-            *ngIf="(uiService.selectedLanguage$|async) === 'nl' && !(authService.isLoggedIn$)">{{(objectService.venue$|async)?.nameNl}}</div>
+            *ngIf="(uiService.selectedLanguage$|async) === 'nl'">
+            {{(objectService.venue$|async)?.nameNl}}
+        </div>
         <div class="venue-name"
             (click)="onVenue()"
-            *ngIf="(uiService.selectedLanguage$|async) === 'en' && !(authService.isLoggedIn$)">{{(objectService.venue$|async)?.nameEn}}</div>
+            *ngIf="(uiService.selectedLanguage$|async) === 'en'">
+            {{(objectService.venue$|async)?.nameEn}}
+        </div>
     </div>
 
 </mat-toolbar>
+
+
+<!-- Chromerun://localhost:4200//?site=mochuco&objectId=Ab4lKDqIwPINclaqKR6S&venueId=00zQuHJ5pHtqjxNZv90k&browser=safari
+localhost:4200//?site=mochuco&objectId=Ab4lKDqIwPINclaqKR6S&venueId=00zQuHJ5pHtqjxNZv90k&browser=firefox
+microsoft-edge:localhost:4200//?site=mochuco&objectId=Ab4lKDqIwPINclaqKR6S&venueId=00zQuHJ5pHtqjxNZv90k
+safari:localhost:4200//?site=mochuco&objectId=Ab4lKDqIwPINclaqKR6S&venueId=00zQuHJ5pHtqjxNZv90k
+
+safari:https://mochuco-a185b.web.app/?site=mochuco&objectId=Ab4lKDqIwPINclaqKR6S&venueId=00zQuHJ5pHtqjxNZv90k -->

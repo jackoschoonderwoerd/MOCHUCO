@@ -1,0 +1,104 @@
+<div class="component-container">
+    <div class="name_id_times-visited">
+        <div class="name">
+            {{mochucoObject.nameNl}}
+        </div>
+        <div class="id"
+            *ngIf="authService.isAdmin$|async">
+            {{mochucoObject.id}}
+        </div>
+        <button mat-raised-button
+            color="primary"
+            class="times-visited"
+            (click)="onTimesVisited()">
+            <div class="button-text">
+                <div class="visited">
+                    visited:
+                </div>
+                <div class="length">
+                    &nbsp;{{registeredVisitsLength}}
+                </div>
+            </div>
+        </button>
+
+
+    </div>
+    <div class="images">
+        <div class="thumbnail"
+            *ngIf="mochucoObject.imageUploadData">
+            <img [src]="mochucoObject.imageUploadData.imageUrl"
+                alt="">
+        </div>
+        <div class="qr-codes">
+            <!-- STYLE -->
+
+            <!-- REMOTE -->
+            <div class="remote">
+                <div class="url-remote">
+                    <a href="remote-link"
+                        [href]="mochucoObject.objectUrl">visit remote</a>
+                </div>
+                <div class="print-area-container">
+
+                    <div class="print-area"
+                        id="{{mochucoObject.id}}">
+                        <div class="qr-code-remote">
+                            <!-- <ngx-qrcode-styling [config]="config"></ngx-qrcode-styling> -->
+                            <ngx-qrcode-styling #qrcode
+                                [type]="'canvas'"
+                                [shape]="'square'"
+                                [width]="200"
+                                [height]="200"
+                                [margin]="5"
+                                [data]="'https://mochuco-a185b.web.app/?site=mochuco&objectId=' +
+                                mochucoObject.id +
+                                '&venueId=' +
+                                venue.id"
+                                image="./../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png">
+                            </ngx-qrcode-styling>
+                            <!-- data="https://mochuco-a185b.web.app/?site=mochuco&objectId={{mochucoObject.id}}&venueId={{venue.id}}" -->
+                        </div>
+                        <div class="object-name">{{mochucoObject.nameNl}}</div>
+
+                    </div>
+                </div>
+                <button mat-raised-button
+                    color="primary"
+                    class="dowmload-qrcode-btn"
+                    (click)="onDownloadQrcode()">download qr-code</button>
+            </div>
+            <!-- DEV -->
+            <div *ngIf="authService.isAdmin$|async"
+                class="dev">
+                <div class="url-dev">
+                    <a class="dev-link"
+                        [href]="mochucoObject.objectUrlDev">dev</a>
+                </div>
+                <div class="qr-code-dev">
+                    <qr-code [value]="'http://localhost:4200//?site=mochuco&objectId=' +
+                                        mochucoObject.id +
+                                        '&venueId=' +
+                                        venue.id"
+                        [size]="125">
+                    </qr-code>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons delete_edit">
+        <button class="delete"
+            mat-raised-button
+            color="warn"
+            (click)="onDeleteObject()">
+            delete object
+        </button>
+        <button mat-raised-button
+            color="primary"
+            (click)="onEditObject(mochucoObject.id)">
+            edit object
+        </button>
+    </div>
+</div>
+<!-- src\assets\Logo\2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png -->
+<!-- src\assets\Logo\2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png -->
+<!-- data="https://mochuco-a185b.web.app/?site=mochuco&objectId={{mochucoObject.id}}&venueId={{venue.id}}" -->

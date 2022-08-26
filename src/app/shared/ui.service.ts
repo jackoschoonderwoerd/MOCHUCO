@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Venue } from '../admin/admin.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,10 @@ export class UiService {
     public isLoadingImage$ = this.isLoadingImageSubject.asObservable()
 
     private selectedLanguageSubject = new BehaviorSubject<string>('nl')
-    public selectedLanguage$ = this.selectedLanguageSubject.asObservable()
+    public selectedLanguage$ = this.selectedLanguageSubject.asObservable();
+
+    private activeVenueSubject = new BehaviorSubject<Venue>(null)
+    public activeVenue$ = this.activeVenueSubject.asObservable()
 
     constructor() { }
 

@@ -1,7 +1,7 @@
 <!-- <button mat-raised-button><a routerLink="/admin">admin</a></button> -->
 <div class="page-container">
     <div class="admin-header">
-        <span>venue&nbsp;</span>{{venue.nameNl}}
+        <span>venue&nbsp;</span>{{venue?.nameNl}}
     </div>
     <form [formGroup]="form">
         <mat-form-field>
@@ -55,7 +55,12 @@
                 <button class="show-objects-btn"
                     mat-raised-button
                     color="primary"
-                    (click)="onObjects()">show <span class="button-highlight">objects</span> {{venue?.nameNl}} </button>
+                    (click)="onObjects()">
+                    <a>
+                        show <span class="button-highlight">objects</span> {{venue?.nameNl}}
+                    </a>
+
+                </button>
             </div>
         </div>
     </div>

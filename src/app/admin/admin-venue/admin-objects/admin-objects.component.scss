@@ -1,12 +1,20 @@
 .page-container {
+    background-color: white;
+    margin: auto;
+    width: 100%;
+    max-width: 500px;
     padding: 1rem;
-    height: 100px;
-    // .admin-button {
-    //     a {
-    //         text-decoration: none;
-    //         color: white;
-    //     }
-    // }
+    .spinner-container {
+        display: flex;
+        justify-content: center;
+        .spinner_text {
+            display: flex;
+            flex-direction: column;
+            mat-spinner {
+                margin-bottom: 2rem;
+            }
+        }
+    }
     .admin-header {
         text-transform: uppercase;
         background-color: #ccc;
@@ -15,73 +23,34 @@
         // font-size: 1.3rem;
     }
     .objects {
-        .objects-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            .object {
-                border: 2px solid black;
-                padding: 0.5rem;
-                margin-bottom: 0.5rem;
-                .name {
-                    background-color: #ccc;
-                    padding: 0.3rem;
-                    text-transform: uppercase;
-                }
-                .images {
-                    display: flex;
-                    justify-content: space-evenly;
-                    margin-bottom: 1rem;
-                    .thumbnail {
-                        padding: 1rem;
-                        width: 200px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        img {
-                            width: 100%;
-                        }
-                    }
-                    .remote {
-                        width: 200px;
-                        // padding: 1rem;
-                        .url-remote {
-                            a {
-                            }
-                        }
-                        .qr-code-remote {
-                        }
-                    }
-                    .dev {
-                        width: 200px;
-                        // padding: 1rem;
-                        .url-dev {
-                            a {
-                            }
-                        }
-                        .qr-code-dev {
-                        }
-                    }
-                }
-                .delete_edit {
-                    background-color: #ccc;
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 0.5rem;
-                    .delete {
-                    }
-                }
+    }
+    .back_add {
+        display: flex;
+        justify-content: space-between;
+        *:nth-child(odd) {
+            margin-right: 0.5rem;
+        }
+        .back,
+        .add {
+            margin-right: 1rem;
+            a {
+                text-decoration: none;
+                color: white;
             }
         }
-        .back_add {
-            display: flex;
-            justify-content: space-between;
-            .back {
-                margin-right: 1rem;
-                a {
-                    text-decoration: none;
-                    color: white;
-                }
+        .div-back,
+        .div-add {
+            text-transform: uppercase;
+            font-weight: 500;
+            padding: 0.5rem 0.7rem;
+            // margin: 0.3rem;
+            background-color: #3f51b5;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            a {
+                text-decoration: none;
+                color: white;
             }
         }
     }

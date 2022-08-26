@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { UiService } from '../../shared/ui.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-mochuco',
@@ -13,6 +14,7 @@ export class MochucoComponent implements OnInit {
 
     constructor(
         public uiService: UiService,
+        private router: Router
         // private dialogRef: MatDialogRef<MochucoComponent>,
         // private dialog: MatDialog
     ) { }
@@ -23,6 +25,9 @@ export class MochucoComponent implements OnInit {
         //     console.log(status)
         //     this.isLoading = status;
         // })
+    }
+    onAdminOnly() {
+        this.router.navigateByUrl('/admin')
     }
 
 }

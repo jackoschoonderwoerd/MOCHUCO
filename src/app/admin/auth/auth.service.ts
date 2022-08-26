@@ -23,6 +23,7 @@ export class AuthService {
 
     private isLoggedInSubject = new BehaviorSubject<boolean>(false);
     public isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
     private isAdminSubject = new BehaviorSubject<boolean>(false);
     public isAdmin$ = this.isAdminSubject.asObservable();
 
@@ -62,6 +63,8 @@ export class AuthService {
                     if (fireAuthUser.user.email === 'jackoboes@gmail.com') {
                         console.log('admin!')
                         this.isAdminSubject.next(true);
+                    } else {
+                        console.log('not admin')
                     }
                     localStorage.setItem(AUTH_DATA, JSON.stringify(mochucoUser));
                 })

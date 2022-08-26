@@ -25,6 +25,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { QRCodeModule } from 'angular2-qrcode';
 import { TestComponent } from './pages/test/test.component';
 import { LogoComponent } from './pages/logo/logo.component';
+import { VisitsComponent } from './admin/admin-venue/admin-objects/admin-objects-list-item/visits/visits.component';
+
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { LogoComponent } from './pages/logo/logo.component';
         ObjectComponent,
         MochucoComponent,
         TestComponent,
-        LogoComponent
+        LogoComponent,
+        VisitsComponent
     ],
     imports: [
         BrowserModule,
@@ -57,10 +60,13 @@ import { LogoComponent } from './pages/logo/logo.component';
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             scope: './',
+
             // Register the ServiceWorker as soon as the application is stable
             // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000'
+            registrationStrategy: 'registerWhenStable:30000',
+
         }),
+
         provideAuth(() => getAuth()),
         provideStorage(() => getStorage()),
         // ServiceWorkerModule.register('ngsw-worker.js', {

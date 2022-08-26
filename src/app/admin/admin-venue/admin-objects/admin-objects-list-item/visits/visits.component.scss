@@ -1,0 +1,42 @@
+.page-container {
+    padding: 1rem;
+    margin: auto;
+    background-color: white;
+    min-height: 100%;
+    max-width: 500px;
+    .header {
+        padding: 1rem;
+        background-color: #ccc;
+        .venue-name {
+            text-transform: uppercase;
+        }
+        .mochuco-object-name {
+            text-transform: uppercase;
+        }
+    }
+    .times-visited {
+        list-style: none;
+        padding: 1rem 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+            .full-date {
+            }
+            .short-time_delete-visit {
+                align-items: center;
+                display: flex;
+                .short-time {
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

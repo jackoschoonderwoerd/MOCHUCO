@@ -27,6 +27,8 @@
     "@capacitor/core": "^3.6.0",
     "an-qrcode": "^1.0.7",
     "angular2-qrcode": "^2.0.3",
+    "jspdf": "^2.5.1",
+    "ngx-qrcode-styling": "^1.1.1",
     "ngx-scanner-qrcode": "^1.0.17",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

@@ -1,10 +1,12 @@
 <div class="page-container">
-    <div *ngIf="venueName"
+    <div *ngIf="venue$|async"
         class="venue-name">
-        {{venueName}} - object
+        {{(venue$|async)?.nameNl}}
     </div>
     <div class="top">
-
+        <div class="times-visited">
+            <!-- {{objectService.timesVisited$|async}} -->
+        </div>
         <div class="top-left">
             <!-- <button mat-raised-button color="primary" (click)="onAdmin()">admin</button> -->
             <form [formGroup]="form">
@@ -38,19 +40,27 @@
 
             </form>
         </div>
-        <div class="top-right">
-            <div *ngIf="imageUrl"
-                class="preview">
-                <img #img
-                    [src]="imageUrl"
+        <div class="mat-spinner-container"
+            *ngIf="isStoringImage">
+            <div class="spinner_loading-image">
+                <mat-spinner></mat-spinner>
+                <div class="loading-image">
+                    storing image...
+                </div>
+            </div>
+        </div>
+        <div class="top-right"
+            *ngIf="!isStoringImage">
+            <div class="preview">
+                <img [src]="imageUrl"
                     alt="">
             </div>
-
             <input class="file-input"
+                #fileInput
                 type="file"
                 (change)="onUploadImage($event)">
             <button class="delete-image"
-                *ngIf="mochucoObject?.imageUrl"
+                *ngIf="imageUrl"
                 mat-raised-button
                 color="warn"
                 (click)="onDeleteImage()">delete image</button>
@@ -61,8 +71,13 @@
             <button mat-raised-button
                 color="primary"
                 class="cancel"
-                [routerLink]="['/admin/admin-objects', {venueId: venueId}]">back to <span class="button-highlight">objects</span> {{venueName}}</button>
+                [routerLink]="['/admin/admin-objects', {venueId: venueId}]">
+                back to
+
+                <span class="button-highlight">objects</span> {{venue?.nameNl}}
+            </button>
             <button mat-raised-button
+                [disabled]="isStoringImage || form.invalid"
                 class="add"
                 color="primary"
                 (click)="onAddObject()">{{editmode ? 'save edits' : 'add object'}}</button>

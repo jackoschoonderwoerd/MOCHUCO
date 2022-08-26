@@ -1,86 +1,33 @@
 <div class="page-container">
-
-    <!-- <button class="admin-button"
-        mat-raised-button
-        color="primary"><a routerLink="/admin">admin</a></button> -->
+    <div class="spinner-container"
+        *ngIf="!(objects$|async)">
+        <div class="spinner_text">
+            <mat-spinner></mat-spinner>
+            <div class="loading-text">Loading objects...</div>
+        </div>
+    </div>
     <div class="admin-header">objects&nbsp;<span>{{(venue$|async)?.nameNl}}</span></div>
     <div class="objects">
-        <ul class="objects-list">
-            <li class="object"
-                *ngFor="let object of objects$|async">
-                <div class="name">
-
-                    {{object.nameNl}}
-
-                </div>
-                <!-- REMOTE -->
-                <div class="images">
-                    <div class="thumbnail">
-                        <img [src]="object.imageUrl"
-                            alt="">
-                    </div>
-
-                    <div class="remote">
-                        <div class="url-remote">
-                            <a href="remote-link"
-                                [href]="object.objectUrl">remote</a>
-                        </div>
-                        <div class="qr-code-remote">
-                            <qr-code [value]="'https://mochuco-a185b.web.app/?site=mochuco&objectId='+
-                                object.id +
-                                '&venueId=' +
-                                venueId"
-                                [size]="150">
-                            </qr-code>
-                        </div>
-                    </div>
-                    <!-- DEV -->
-                    <div *ngIf="authService.isAdmin$|async"
-                        class="dev">
-                        <div class="url-dev">
-                            <a class="dev-link"
-                                [href]="object.objectUrlDev">dev</a>
-                        </div>
-                        <div class="qr-code-dev">
-                            <qr-code [value]="'http://localhost:4200//?site=mochuco&objectId=' +
-                                object.id +
-                                '&venueId=' +
-                                venueId"
-                                [size]="150">
-                            </qr-code>
-                        </div>
-                    </div>
-                </div>
-                <div class="buttons delete_edit">
-                    <button class="delete"
-                        mat-raised-button
-                        color="warn"
-                        (click)="onDeleteObject(object.id)">
-                        delete object
-                    </button>
-                    <button mat-raised-button
-                        color="primary"
-                        (click)="onEditObject(object.id)">
-                        edit object
-                    </button>
-                </div>
-            </li>
-        </ul>
-
-        <div *ngIf="venue"
-            class="buttons back_add">
-
-            <button mat-raised-button
-                class="back"
-                color="primary">
-                <a [routerLink]="['/admin/admin-venue', {id: (venue$|async)?.id}]">
-                    back to<span class="button-highlight">&nbsp;venue&nbsp;</span>{{venue.nameNl}}
-                </a>
-            </button>
-            <button mat-raised-button
-                class="add"
-                color="primary"
-                (click)="onAddObject()">add<span class="button-highlight">&nbsp;object&nbsp;</span>to {{venue.nameNl}}</button>
+        <app-admin-objects-list-item *ngFor="let object of objects$|async"
+            [mochucoObject]="object"
+            [venue]="venue">
+        </app-admin-objects-list-item>
+    </div>
+    <div *ngIf="venue"
+        class="buttons back_add">
+        <div class="div-back"
+            color="primary"
+            [routerLink]="['/admin/admin-venue', {id: (venue$|async)?.id}]">
+            <a>
+                back to<span class="button-highlight">&nbsp;venue&nbsp;</span>{{venue.nameNl}}
+            </a>
+        </div>
+        <div class="div-add"
+            color="primary"
+            (click)="onAddObject()">
+            <a>
+                add<span class="button-highlight">&nbsp;object&nbsp;</span>to {{venue.nameNl}}
+            </a>
         </div>
     </div>
 </div>

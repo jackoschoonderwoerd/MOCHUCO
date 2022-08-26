@@ -1,8 +1,3 @@
-<div *ngIf="(uiService.isLoading$|async)"
-    class="page-container">
-    <!-- <mat-spinner></mat-spinner> -->
-</div>
-<!-- <div *ngIf="!(uiService.isLoading$|async)" -->
 <div class="page-container">
     <div class="header">
         <div *ngIf="(uiService.selectedLanguage$|async) === 'nl'"
@@ -19,10 +14,20 @@
             class="content_nl">
             "Mochuco is een nieuwe mogelijkheid om makkelijk en snel meer te weten te komen over ons cultureel erfgoed. Veel van onze geschiedenis geeft waardevolle, leuke en interessante informatie. U herkent de Mochuco QRcodes aan het uiltje in het midden. Scan de code en u krijgt direct de informatie te zien.
         </div>
+        <br>
+        <div class="sign-off">
+            Wij wensen u veel plezier!
+            <br><br>
+
+            Mochuco
+        </div>
         <div *ngIf="(uiService.selectedLanguage$|async) === 'en'"
             class="content_en">English content
         </div>
     </div>
     <button mat-raised-button
-        color="primary"><a routerLink="/admin">admin only</a></button>
+        color="primary"
+        (click)="onAdminOnly()">
+        admin only
+    </button>
 </div>
