@@ -1,0 +1,25 @@
+<div class="component-container">
+    <div class="header">audio</div>
+    <div class="audio-container"
+        *ngFor="let language of languages">
+        <div class="language">{{language}}</div>
+        <input id="audioInput"
+            type="file"
+            (change)="onFileChange($event, language)"
+            #audioInput>
+        <div class="audio"
+            *ngFor="let audioUrlData of audioUrlsData">
+            <div class=""
+                *ngIf="language === audioUrlData.language">
+
+                <audio [src]="audioUrlData.audioUrl"
+                    controls>
+                </audio>
+                <button mat-raised-button
+                    color="warn"
+                    (click)="onDeleteAudio(language)">delete audio&nbsp;{{language}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { MochucoObject, ObjectService } from '../../../../pages/object/object.se
 import { AdminObjectService, ImageUploadData } from './admin-object.service';
 import { Observable } from 'rxjs';
 import { Venue } from 'src/app/admin/admin.service';
+import { AdminObjectAudioService, AudioUrlData } from './admin-object-audio/admin-object-audio.service';
 
 @Component({
     selector: 'app-admin-object',
@@ -22,7 +23,8 @@ export class AdminObjectComponent implements OnInit {
         private fb: FormBuilder,
         private router: Router,
         private adminObjectService: AdminObjectService,
-        public objectService: ObjectService) { }
+        public objectService: ObjectService,
+        public adminObjectAudioService: AdminObjectAudioService) { }
 
 
     form: FormGroup;
@@ -40,23 +42,57 @@ export class AdminObjectComponent implements OnInit {
     venue$: Observable<Venue>
     venue: Venue
     @ViewChild('fileInput') fileInput: ElementRef;
+    @ViewChild('audioInputNl') audioInputNl: ElementRef;
+    @ViewChild('audioInputEn') audioInputEn: ElementRef;
+    // languages: string[] = ['dutch', 'english', 'french'];
+    audioUrl: string;
+    dutchAudioUrl: string;
+    englishAudioUrl: string;
+
+    dutchAudioUrl$: Observable<string>;
+    englishAudioUrl$: Observable<string>;
 
 
     ngOnInit(): void {
         this.initForm()
+        this.adminObjectAudioService.downloadUrl$.subscribe((audioUrlData: AudioUrlData) => {
+            console.log(audioUrlData)
+            if (audioUrlData.language === 'dutch') {
+                this.dutchAudioUrl = audioUrlData.audioUrl
+            } else if (audioUrlData.language === 'english') {
+                this.englishAudioUrl = audioUrlData.audioUrl
+            }
+
+        })
         this.venueId = this.route.snapshot.paramMap.get('venueId');
         // const venueId = this.route.snapshot.paramMap.get('venueId')
         this.adminService.getVenue(this.venueId).subscribe((venue: Venue) => {
             this.venue = venue;
-            console.log(this.venue)
         })
         this.venue$ = this.adminService.getVenueObservable(this.venueId);
         this.objectId = this.route.snapshot.paramMap.get('objectId');
         // this.objectService.getTimesVisited(this.objectId, this.venueId)
         if (this.objectId) {
             this.editmode = true;
+            this.adminObjectAudioService.getAudioCollection(this.venueId, this.objectId)
+                .subscribe((audioUrlData: AudioUrlData[]) => {
+                    console.log(audioUrlData)
+                    audioUrlData.forEach((audioUrlData: any) => {
+                        console.log(audioUrlData)
+                        if (audioUrlData.language === 'dutch') {
+                            this.dutchAudioUrl = audioUrlData.audioUrl;
+                            console.log(this.dutchAudioUrl)
+                        } else if (audioUrlData.language === 'english') {
+                            this.englishAudioUrl = audioUrlData.audioUrl;
+                            console.log(this.englishAudioUrl)
+                        } else {
+                            console.log('no match found')
+                        }
+                    })
+                });
             this.adminService.getObject(this.venueId, this.objectId).subscribe((mochucoObject: MochucoObject) => {
                 this.mochucoObject = mochucoObject;
+                console.log(mochucoObject);
                 if (this.mochucoObject && this.mochucoObject.imageUploadData) {
                     this.imageUrl = this.mochucoObject.imageUploadData.imageUrl
                 }
@@ -65,6 +101,8 @@ export class AdminObjectComponent implements OnInit {
                 });
             })
         }
+        // this.dutchAudioUrl$ = this.adminObjectAudioService.getDutchAudio(this.venueId, this.objectId);
+        // this.englishAudioUrl$ = this.adminObjectAudioService.getEnglishAudio(this.venueId, this.objectId);
     }
 
     initForm() {
@@ -85,6 +123,16 @@ export class AdminObjectComponent implements OnInit {
         // this.onAddObject()
         this.isStoringImage = true;
         const file = e.target.files[0];
+        console.log(file.name.split('.').pop());
+        if (
+            file.name.split('.').pop() !== 'jpg'
+            && file.name.split('.').pop() !== 'jpeg'
+            && file.name.split('.').pop() !== 'png') {
+            alert('invalid file format (only .jpg, .jpeg and .png allowed)');
+            this.resetFileInput();
+            this.isStoringImage = false;
+            return
+        }
         const filename = e.target.files[0].name.split('.')[0];
         const filepath = `Mochuco/${this.venue.nameNl}`;
 
@@ -98,6 +146,10 @@ export class AdminObjectComponent implements OnInit {
                 console.log('imageUploadData added to form', 'preview image')
             })
             .catch((err) => console.log(err));
+
+    }
+
+    resetFileInput() {
         this.fileInput.nativeElement.value = '';
     }
 
@@ -152,12 +204,6 @@ export class AdminObjectComponent implements OnInit {
 
 
                     // // ADD IMAGE?
-                    // if (this.imageUploadData) {
-                    //     console.log(this.imageUploadData)
-                    //     this.mochucoObject.imageUploadData = this.imageUploadData
-                    // } else {
-                    //     console.log('NO IMAGE UPLOAD DATA: ', this.imageUploadData);
-                    // }
                     this.adminService.updateObject(this.venueId, this.mochucoObject)
                         .then(res => {
                             console.log(console.log('object updated'))
@@ -197,4 +243,19 @@ export class AdminObjectComponent implements OnInit {
                 .catch(err => console.log(err));
         }
     }
+    // onAudioInputChange(e, language) {
+    //     const file = e.target.files[0];
+    //     this.adminObjectAudioService.audioStorage(this.venueId, this.objectId, language, file)
+    //     this.audioInputEn.nativeElement.value = '';
+    //     this.audioInputNl.nativeElement.value = '';
+
+    // }
+    // onDeleteAudio(language) {
+    //     this.adminObjectAudioService.deleteAudio(this.venueId, this.objectId, language)
+    //         .then((res) => {
+    //             console.log('audio deleted', res)
+    //         })
+    //         .catch(err => console.log(err));
+    // }
+
 }

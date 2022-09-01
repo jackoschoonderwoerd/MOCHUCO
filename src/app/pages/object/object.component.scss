@@ -68,7 +68,11 @@
         margin-bottom: 1rem;
         // border: 1px solid green;
     }
-    .filler {
-        height: 5rem;
+    .audio-container {
+        display: flex;
+        justify-content: center;
+
+        audio {
+        }
     }
 }

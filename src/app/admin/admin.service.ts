@@ -14,15 +14,15 @@ import {
     orderBy,
     query
 } from '@angular/fire/firestore';
-import { Observable, take, map } from 'rxjs';
+import { Observable, take, map, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MochucoObject } from './../pages/object/object.service'
 
 export interface Venue {
     nameNl: string;
     contentNl: string;
-    nameEn: string;
-    contentEn: string;
+    nameEn?: string;
+    contentEn?: string;
     id?: string;
     objects?: Object[]
 }
@@ -33,6 +33,14 @@ export interface Venue {
 
 
 export class AdminService {
+
+    venue: Venue = {
+        nameNl: '',
+        contentNl: ''
+    }
+
+    private venueSubject = new BehaviorSubject<Venue>(this.venue);
+    venue$ = this.venueSubject as Observable<Venue>;
 
     constructor(
         private firestore: Firestore,
@@ -53,6 +61,9 @@ export class AdminService {
         const venueRef = doc(this.firestore, `venues/${venueId}`)
         return docData(venueRef, { idField: 'id' }) as Observable<Venue>;
     }
+    // setVenueToZero() {
+    //     this.venueSubject.next(this.venue);
+    // }
 
     addVenue(venue: Venue) {
         console.log(venue);

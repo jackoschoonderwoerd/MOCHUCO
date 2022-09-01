@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService, Venue } from './admin.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { ObjectService } from '../pages/object/object.service';
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
     public myAngularxQrCode: string = null;
     venues$: Observable<Venue[]>
 
@@ -27,6 +27,8 @@ export class AdminComponent implements OnInit {
     ngOnInit(): void {
         this.venues$ = this.adminService.getVenues();
         // this.adminService.getVenues().subscribe(data => console.log(data))
+        // this.adminService.setVenueToZero()
+        this.objectService.setVenue(null)
     }
     onDeleteVenue(id: string) {
         console.log(id);
@@ -51,5 +53,8 @@ export class AdminComponent implements OnInit {
     onLogOut() {
         this.authService.logOut()
     }
-
+    ngOnDestroy(): void {
+        console.log('admin component destroyed')
+        this.objectService.setVenue(null)
+    }
 }

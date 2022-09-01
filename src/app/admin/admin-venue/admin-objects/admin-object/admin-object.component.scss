@@ -23,6 +23,7 @@
         .top-left {
             // border: 3px solid red;
             width: 100%;
+            margin-right: 0.5rem;
             form {
                 margin: auto;
                 width: 100%;
@@ -51,18 +52,48 @@
             }
         }
         .top-right {
-            padding: 1rem;
-            .file-input {
-            }
-            .preview {
-                // max-width: 1500px;
-                margin-bottom: 1rem;
-                img {
-                    width: 100%;
+            padding: 1rem 0;
+            .image {
+                padding: 0.3rem;
+                background-color: #ccc;
+                margin-bottom: 0.3rem;
+                .header {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                }
+
+                .image-file-input {
+                }
+                .preview {
+                    // max-width: 1500px;
+                    margin-bottom: 1rem;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .image-file-input {
+                    margin-bottom: 1rem;
                 }
             }
-            .file-input {
-                margin-bottom: 1rem;
+            .audio {
+                background-color: #ccc;
+                padding: 0.3rem;
+                .header {
+                    text-transform: uppercase;
+                }
+                .audio-file-input-container {
+                    .audio-file-input {
+                        padding: 0.3rem;
+                        border: 1px solid black;
+                        margin-bottom: 0.3rem;
+                        .language {
+                            text-transform: uppercase;
+                        }
+                        input {
+                            margin-bottom: 0.3rem;
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,4 +1,7 @@
 <div class="page-container">
+    <div class="audio">
+
+    </div>
     <div *ngIf="venue$|async"
         class="venue-name">
         {{(venue$|async)?.nameNl}}
@@ -17,7 +20,7 @@
                         placeholder="name nl">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea rows="5"
+                    <textarea rows="10"
                         type="text"
                         matInput
                         formControlName="contentNl"
@@ -31,13 +34,12 @@
                         placeholder="name en">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea rows="5"
+                    <textarea rows="10"
                         type="text"
                         matInput
                         formControlName="contentEn"
                         placeholder="content en"></textarea>
                 </mat-form-field>
-
             </form>
         </div>
         <div class="mat-spinner-container"
@@ -51,19 +53,25 @@
         </div>
         <div class="top-right"
             *ngIf="!isStoringImage">
-            <div class="preview">
-                <img [src]="imageUrl"
-                    alt="">
+            <div class="image">
+                <div class="header">image</div>
+                <div class="preview">
+                    <img [src]="imageUrl"
+                        alt="">
+                </div>
+                <input class="image-file-input"
+                    #fileInput
+                    type="file"
+                    (change)="onUploadImage($event)">
+                <button class="delete-image"
+                    *ngIf="imageUrl"
+                    mat-raised-button
+                    color="warn"
+                    (click)="onDeleteImage()">delete image
+                </button>
             </div>
-            <input class="file-input"
-                #fileInput
-                type="file"
-                (change)="onUploadImage($event)">
-            <button class="delete-image"
-                *ngIf="imageUrl"
-                mat-raised-button
-                color="warn"
-                (click)="onDeleteImage()">delete image</button>
+            <app-admin-object-audio [venueId]="venueId"
+                [objectId]="objectId"></app-admin-object-audio>
         </div>
     </div>
     <div class="bottom">

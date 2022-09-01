@@ -5,6 +5,7 @@ import { ObjectService } from './object.service';
 import { UiService } from '../../shared/ui.service';
 import { AdminService } from '../../admin/admin.service';
 import { AuthService } from '../../admin/auth/auth.service';
+import { AdminObjectAudioService, AudioUrlData } from '../../admin/admin-venue/admin-objects/admin-object/admin-object-audio/admin-object-audio.service';
 
 @Component({
     selector: 'app-object',
@@ -19,6 +20,11 @@ export class ObjectComponent implements OnInit {
     venueId: string;
     objectId: string;
     likeButtonDisabled: boolean = true
+    dutchAudioUrl$: Observable<string>
+    englishAudioUrl$: Observable<string>;
+    englishAudioUrl: string;
+    audioUrlsData: AudioUrlData[];
+    language: string;
 
     // object$: Observable<Object>;
 
@@ -30,7 +36,8 @@ export class ObjectComponent implements OnInit {
         public uiService: UiService,
         private router: Router,
         private adminService: AdminService,
-        public authService: AuthService
+        public authService: AuthService,
+        public adminObjectAudioService: AdminObjectAudioService,
     ) {
 
     }
@@ -53,7 +60,20 @@ export class ObjectComponent implements OnInit {
                     this.likes = likesData.likes
                 })
             });
+        });
+        this.uiService.selectedLanguage$.subscribe((language: string) => {
+            console.log(language);
+            this.language = language;
         })
+        // this.adminObjectAudioService.getDutchAudio(this.venueId, this.objectId)
+        // this.dutchAudioUrl$ = this.adminObjectAudioService.getDutchAudio(this.venueId, this.objectId);
+        // this.englishAudioUrl$ = this.adminObjectAudioService.getEnglishAudio(this.venueId, this.objectId);
+        this.adminObjectAudioService.getAudioCollection(this.venueId, this.objectId)
+            .subscribe((audioUrlsData: AudioUrlData[]) => {
+                console.log(audioUrlsData)
+                this.audioUrlsData = audioUrlsData
+            })
+
     }
 
     // redirect() {
@@ -85,4 +105,5 @@ export class ObjectComponent implements OnInit {
         // this.adminService.addLike(this.objectId, this.venueId)
 
     }
+
 }

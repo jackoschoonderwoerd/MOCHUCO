@@ -17,6 +17,8 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { AdminObjectsListItemComponent } from './admin-venue/admin-objects/admin-objects-list-item/admin-objects-list-item.component';
 import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
+import { AdminObjectAudioComponent } from './admin-venue/admin-objects/admin-object/admin-object-audio/admin-object-audio.component';
+
 
 
 
@@ -36,7 +38,9 @@ import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
         LoginComponent,
         AdminObjectComponent,
         AdminObjectsComponent,
-        AdminObjectsListItemComponent
+        AdminObjectsListItemComponent,
+
+        AdminObjectAudioComponent
     ],
     imports: [
         CommonModule,

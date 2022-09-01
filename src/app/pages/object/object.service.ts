@@ -29,6 +29,12 @@ import { ImageUploadData } from '../../admin/admin-venue/admin-objects/admin-obj
 import { AdminService } from '../../admin/admin.service';
 import { getLocaleDateFormat } from '@angular/common';
 
+export interface MochucoAudio {
+    audioNL?: File,
+    audioEn?: File,
+    audioFr?: File
+}
+
 export interface MochucoObject {
     id?: string
     nameNl: string;
@@ -40,6 +46,8 @@ export interface MochucoObject {
     imageUrl?: string
     imageUploadData?: ImageUploadData;
     timesVisitedId?: string;
+    audio?: MochucoAudio
+
 
 }
 
@@ -116,14 +124,24 @@ export class ObjectService {
     }
 
     setVenue(venueId) {
-        this.venueIdSubject.next(venueId)
-        // console.log('object.service 106 setVenue(){}', venueId)
-        const venueRef = doc(this.fs, `venues/${venueId}`)
-        docData(venueRef, { idField: 'id' }).subscribe((venue: Venue) => {
-            // console.log(venue);
-            this.venue = venue;
+        console.log(venueId);
+        if (venueId) {
+            this.venueIdSubject.next(venueId)
+            // console.log('object.service 106 setVenue(){}', venueId)
+            const venueRef = doc(this.fs, `venues/${venueId}`)
+            docData(venueRef, { idField: 'id' }).subscribe((venue: Venue) => {
+                // console.log(venue);
+                this.venue = venue;
+                this.venueSubject.next(venue);
+            })
+        } else {
+            console.log('remove venue name')
+            const venue: Venue = {
+                nameNl: '',
+                contentNl: ''
+            }
             this.venueSubject.next(venue);
-        })
+        }
     }
 
 
