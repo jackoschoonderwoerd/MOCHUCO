@@ -35,13 +35,13 @@
             <!-- REMOTE -->
             <div class="remote">
                 <div class="url-remote">
-                    <a href="remote-link"
-                        [href]="mochucoObject.objectUrl">visit remote</a>
+                    <button mat-raised-button
+                        color="primary">
+                        <a [href]="mochucoObject.objectUrl">preview</a>
+                    </button>
                 </div>
-                <div class="print-area-container">
-
-                    <div class="print-area"
-                        id="{{mochucoObject.id}}">
+                <div class="display-area-container">
+                    <div class="display-area">
                         <div class="qr-code-remote">
                             <!-- <ngx-qrcode-styling [config]="config"></ngx-qrcode-styling> -->
                             <ngx-qrcode-styling #qrcode
@@ -59,9 +59,9 @@
                             <!-- data="https://mochuco-a185b.web.app/?site=mochuco&objectId={{mochucoObject.id}}&venueId={{venue.id}}" -->
                         </div>
                         <div class="object-name">{{mochucoObject.nameNl}}</div>
-
                     </div>
                 </div>
+
                 <button mat-raised-button
                     color="primary"
                     class="dowmload-qrcode-btn"

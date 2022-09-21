@@ -9,6 +9,7 @@ import { AdminObjectService, ImageUploadData } from './admin-object.service';
 import { Observable } from 'rxjs';
 import { Venue } from 'src/app/admin/admin.service';
 import { AdminObjectAudioService, AudioUrlData } from './admin-object-audio/admin-object-audio.service';
+import { GlobalConstants } from 'src/app/shared/global-contstants';
 
 @Component({
     selector: 'app-admin-object',
@@ -199,6 +200,7 @@ export class AdminObjectComponent implements OnInit {
                     // ADD URLS
                     this.mochucoObject.objectUrl =
                         `https://mochuco-a185b.web.app/?site=mochuco&objectId=${this.mochucoObject.id}&venueId=${this.venueId}`;
+                    // `https://${GlobalConstants.productionUrl}/?site=mochuco&objectId=${this.mochucoObject.id}&venueId=${this.venueId}`;
                     this.mochucoObject.objectUrlDev =
                         `http://localhost:4200//?site=mochuco&objectId=${this.mochucoObject.id}&venueId=${this.venueId}`;
 

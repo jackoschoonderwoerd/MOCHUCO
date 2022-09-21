@@ -35,33 +35,27 @@
         </mat-form-field>
     </form>
     <div class="buttons">
-        <div class="cancel_save_show-objects">
-            <div class="cancel_save">
-                <button color="primary"
-                    class="cancel"
-                    mat-raised-button>
-                    <a routerLink="/admin">
-                        back to all
-                        <span class="button-highlight">venues</span>
-                    </a>
-                </button>
-                <button class="edit"
-                    color="primary"
-                    mat-raised-button
-                    (click)="onAddVenue()">{{editmode ? 'save edits' : 'add venue'}}</button>
-            </div>
-            <div *ngIf="venue"
-                class="show-objects">
-                <button class="show-objects-btn"
-                    mat-raised-button
-                    color="primary"
-                    (click)="onObjects()">
-                    <a>
-                        show <span class="button-highlight">objects</span> {{venue?.nameNl}}
-                    </a>
+        <button class="edit"
+            color="primary"
+            mat-raised-button
+            (click)="onAddVenue()">{{editmode ? 'save edits' : 'add venue'}}
+        </button>
+        <button class="show"
+            mat-raised-button
+            color="primary"
+            (click)="onObjects()">
+            <a>
+                show <span class="button-highlight">objects</span> {{venue?.nameNl}}
+            </a>
+        </button>
 
-                </button>
-            </div>
-        </div>
+        <button color="primary"
+            class="back"
+            mat-raised-button>
+            <a routerLink="/admin">
+                back to all
+                <span class="button-highlight">venues</span>
+            </a>
+        </button>
     </div>
 </div>

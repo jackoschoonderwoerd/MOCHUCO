@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { TestComponent } from '../../../../pages/test/test.component';
+import { DownloadQrComponent } from './download-qr/download-qr.component';
 
 
 @Component({
@@ -36,29 +37,6 @@ export class AdminObjectsListItemComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-
-        // console.log(this.mochucoObject.nameNl)
-
-        // this.config = {
-        //     width: 200,
-        //     height: 200,
-        //     data: `https://mochuco-a185b.web.app/?site=mochuco&objectId=${this.mochucoObject.id}&venueId=${this.venue.id}`,
-        //     image: './../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png',
-        //     margin: 5,
-        //     dotsOptions: {
-        //         color: "#000000",
-        //         type: "square"
-        //     },
-        //     backgroundOptions: {
-        //         color: "#ffffff",
-        //     },
-        //     imageOptions: {
-        //         crossOrigin: "anonymous",
-        //         margin: 0
-        //     }
-        // };
-        // console.log(this.config.data)
-
         this.adminService.getRegisterdVisits(this.venue.id, this.mochucoObject.id)
             .subscribe((registeredVisits: any) => {
                 this.registeredVisitsLength = registeredVisits.length
@@ -66,23 +44,16 @@ export class AdminObjectsListItemComponent implements OnInit {
     }
 
     onDownloadQrcode(): void {
-        // this.dialog.open(TestComponent)
-        console.log('download qr-code');
-        let DATA: any = document.getElementById(this.mochucoObject.id);
-        console.log(DATA)
-        html2canvas(DATA).then((canvas) => {
-            console.log(canvas)
-            let fileWidth = 210;
-            // let fileHeight = 210;
-            let fileHeight = (canvas.height * fileWidth) / canvas.width;
-            const FILEURI = canvas.toDataURL('image/png');
-            let PDF = new jsPDF('p', 'mm', 'a4');
-
-            let position = 0;
-            PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-            PDF.save('angular-demo.pdf');
-        });
-
+        this.dialog.open(DownloadQrComponent,
+            {
+                data:
+                {
+                    objectId: this.mochucoObject.id,
+                    venueId: this.venue.id,
+                    objectName: this.mochucoObject.nameNl,
+                    venueName: this.venue.nameNl
+                }
+            });
     }
 
     onDeleteObject() {

@@ -1,0 +1,36 @@
+<div class="print-area-container">
+    <div id="print-area"
+        #printArea
+        class="print-area"
+        id="{{objectId}}">
+        <div class="venue-name">{{venueName}}</div>
+        <div class="qr-code-remote">
+            <!-- <ngx-qrcode-styling [config]="config"></ngx-qrcode-styling> -->
+            <ngx-qrcode-styling #qrcode
+                [type]="'canvas'"
+                [shape]="'square'"
+                [width]="500"
+                [height]="500"
+                [margin]="5"
+                [data]="'https://mochuco-a185b.web.app/?site=mochuco&objectId=' +
+                                objectId +
+                                '&venueId=' +
+                                venueId"
+                image="./../assets/Logo/2021-0705_Mochuco_-_Logo_zwart_wit_1000px.png">
+            </ngx-qrcode-styling>
+            <!-- data="https://mochuco-a185b.web.app/?site=mochuco&objectId={{mochucoObject.id}}&venueId={{venue.id}}" -->
+        </div>
+        <div class="object-name">{{objectName}}</div>
+    </div>
+    <div class="button-container">
+        <button class="on-download"
+            mat-raised-button
+            color="primary"
+            (click)="onDownloadQrCode()">download qrcode
+        </button>
+        <button mat-raised-button
+            (click)="onCloseDialog()"
+            mat-dialog-close
+            color="primary">close window</button>
+    </div>
+</div>

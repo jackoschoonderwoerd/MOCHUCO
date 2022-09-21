@@ -170,53 +170,6 @@ export class ObjectService {
         })
 
     }
-    // increaseTimesVisited(venueId: string, objectId: string) {
-    //     this.getTimesVisitedId(venueId, objectId).subscribe((data: any) => {
-    //         console.log(data)
-    //         let visited = data.visited
-    //         const newVisited = visited + 1
-    //         // INCREASE VISITED
-    //         this.timesVisitedSubject.next(newVisited);
-    //         this.registerVisit(venueId, objectId)
-    //             .then(res => console.log('visit registerd'))
-    //             .catch(err => console.log('visit NOT registered', err));
-    // const scoreRef = doc(this.fs, `/venues/${venueId}/score/${objectId}`);
-    // const myObject = { visited: newVisited }
-    // updateDoc(scoreRef, myObject)
-    //     .then(res => {
-    //         console.log(res);
-    //         this.registerVisit(venueId, objectId)
-    //             .then(res => console.log('visit registered'))
-    //             .catch(err => console.log('visit registration failed', err));
-    //     })
-    //     .catch(err => console.log(err))
-    //     })
-    // }
-
-    // registerVisit(venueId, objectId) {
-    //     const registerObject = {
-    //         timestamp: new Date()
-    //     }
-    //     const registerRef = collection(this.fs, `venues/${venueId}/objects/${objectId}/visits`);
-    //     return addDoc(registerRef, registerObject)
-    // }
-
-    // getTimesVisitedId(venueId, objectId) {
-    //     console.log(venueId, objectId)
-    //     const scoreRef = doc(this.fs, `/venues/${venueId}/score/${objectId}`);
-    //     return docSnapshots(scoreRef)
-    //         .pipe(
-    //             take(1),
-    //             map(data => {
-    //                 const id = data.id
-    //                 const docData = data.data()
-    //                 return ({ ...docData, id })
-    //             })
-    //         )
-    // }
-
-
-
 
     refreshObject(objectId) {
         // console.log(this.venue, objectId)

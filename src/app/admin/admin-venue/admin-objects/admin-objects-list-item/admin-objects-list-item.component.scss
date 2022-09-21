@@ -59,13 +59,22 @@
                 // width: 150px;
                 // padding: 1rem;
                 .url-remote {
-                    a {
+                    display: flex;
+                    // border: 1px solid red;
+                    button {
+                        margin-bottom: 0.3rem;
+                        width: 100%;
+                        a {
+                            text-decoration: none;
+                            color: white;
+                            text-transform: uppercase;
+                        }
                     }
                 }
-                .print-area-container {
+                .display-area-container {
                     border: 1px solid black;
                     margin-bottom: 0.3rem;
-                    .print-area {
+                    .display-area {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -76,6 +85,32 @@
                             }
                         }
                         .object-name {
+                            text-transform: uppercase;
+                            margin-bottom: 0.2rem;
+                        }
+                    }
+                }
+                .print-area-container {
+                    border: 1px solid black;
+                    margin-bottom: 0.3rem;
+                    .print-area {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        .venue-name {
+                            margin-top: 3rem;
+                            font-size: 2rem;
+                            text-transform: uppercase;
+                            margin-bottom: 0.2rem;
+                        }
+                        .qr-code-remote {
+                            ngx-qrcode-styling {
+                                // width: 150px;
+                            }
+                        }
+                        .object-name {
+                            font-size: 2rem;
                             text-transform: uppercase;
                             margin-bottom: 0.2rem;
                         }

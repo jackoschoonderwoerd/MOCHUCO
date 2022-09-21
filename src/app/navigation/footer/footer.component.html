@@ -1,19 +1,28 @@
-<div class="page-container" *ngIf="!(scannerService.isScanning$|async)">
+<div class="page-container"
+    *ngIf="!(scannerService.isScanning$|async)">
     <div class="footer-content">
         <ul class="flags">
-            <li
-                (click)="onSelectLanguage('nl')"
+            <li (click)="onSelectLanguage('nl')"
                 class="flag"
                 [ngClass]="(uiService.selectedLanguage$|async) === 'nl' ? 'language-selected' : ''">
-                <img src="./../../../assets/flags/flag_nl.png" alt="">
+                <img src="./../../../assets/flags/flag_nl.png"
+                    alt="">
             </li>
-            <li
-                (click)="onSelectLanguage('en')"
+            <li (click)="onSelectLanguage('en')"
                 class="flag"
                 [ngClass]="(uiService.selectedLanguage$|async) === 'en' ? 'language-selected' : ''">
-                <img src="./../../../assets/flags/flag_en.png" alt="">
+                <img src="./../../../assets/flags/flag_en.png"
+                    alt="">
+            </li>
+            <li (click)="onSelectLanguage('fr')"
+                class="flag"
+                [ngClass]="(uiService.selectedLanguage$|async) === 'fr' ? 'language-selected' : ''">
+                <img src="./../../../assets/flags/flag_fr.png"
+                    alt="">
             </li>
         </ul>
-        <button class="on-scanner" mat-raised-button (click)="onScanner()">scanner</button>
+        <button class="on-scanner"
+            mat-raised-button
+            (click)="onScanner()">scanner</button>
     </div>
 </div>

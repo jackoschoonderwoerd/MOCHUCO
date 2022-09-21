@@ -26,6 +26,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { TestComponent } from './pages/test/test.component';
 import { LogoComponent } from './pages/logo/logo.component';
 import { VisitsComponent } from './admin/admin-venue/admin-objects/admin-objects-list-item/visits/visits.component';
+import { UiDialogComponent } from './shared/ui-dialog/ui-dialog.component';
 
 
 
@@ -41,7 +42,8 @@ import { VisitsComponent } from './admin/admin-venue/admin-objects/admin-objects
         MochucoComponent,
         TestComponent,
         LogoComponent,
-        VisitsComponent
+        VisitsComponent,
+        UiDialogComponent
     ],
     imports: [
         BrowserModule,

@@ -1,28 +1,21 @@
 .page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: white;
     margin: auto;
     width: 100%;
     max-width: 500px;
     padding: 1rem;
     min-height: 100%;
-
-    .header {
-        text-transform: uppercase;
-        font-size: 1.2rem;
-    }
-    .admin {
-        a {
-            text-decoration: none;
-            color: white;
-        }
-    }
     .content {
-        margin-bottom: 1rem;
-    }
-    button {
-        a {
-            text-decoration: none;
-            color: white;
+        .content-nl {
         }
+        .content-en {
+        }
+        .content-fr {
+        }
+    }
+    .admin-btn {
     }
 }

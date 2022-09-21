@@ -24,30 +24,18 @@
     .buttons {
         // border: 2px solid pink;
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        .cancel_save_show-objects {
-            padding: 1rem;
-            background-color: #ccc;
-            width: 500px;
-            // border: 2px solid green;
-
-            .cancel_save {
-                display: flex;
-                justify-content: space-between;
-                a {
-                    text-decoration: none;
-                    color: white;
-                }
-            }
-            .show-objects {
-                width: 100%;
-
-                padding: 1rem 0 0 0;
-                display: flex;
-                // border: 2px solid red;
-                .show-objects-btn {
-                    width: 100%;
-                }
+        .edit {
+            margin-bottom: 0.3rem;
+        }
+        .show {
+            margin-bottom: 0.3rem;
+        }
+        .back {
+            a {
+                color: white;
+                text-decoration: none;
             }
         }
     }

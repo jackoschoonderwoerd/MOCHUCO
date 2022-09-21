@@ -18,6 +18,9 @@
             .flag {
                 // border: 1px solid red;
                 width: 2.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
 
                 img {
                     padding: 0.2rem;

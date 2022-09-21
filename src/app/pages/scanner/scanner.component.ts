@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ObjectService } from '../object/object.service';
 import { ScannerService } from './scanner.service';
 import { UiService } from '../../shared/ui.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UiDialogComponent } from '../../shared/ui-dialog/ui-dialog.component';
 
 @Component({
     selector: 'app-scanner',
@@ -27,6 +29,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private scannerService: ScannerService,
         private uiService: UiService,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -38,52 +41,48 @@ export class ScannerComponent implements OnInit, OnDestroy {
         const location = window.location.href
         const headRemoved = location.split('//')[1]
         const headAndTailRemoved = headRemoved.split('/')[0]
-        this.toggleCamera()
-
-
-
-        // if (headAndTailRemoved === 'localhost:4200') {
-        //     this.isInApp = true;
-        //     this.scannerService.setIsInApp(true)
-        // }
 
     }
 
-    toggleCamera() {
-
-    }
 
     onError(e: any): void {
         alert(e);
     }
     onData(event: string) {
-        // this.uiService.setIsLoading(true);
         if (event) {
-            console.log('scanner, onData(){} event: ', event)
+            // alert(event);
+            // this.router.navigateByUrl('event');
+
             localStorage.setItem('last-visited', JSON.stringify(event))
             if (event.indexOf('mochuco') === -1) {
                 alert('this is not a mochuco url');
-                // window.open(event);
                 return;
             }
             console.log('mochuco FOUND')
             this.uiService.isLoadingSubject.next(true);
             const queryparamsStart = event.split('?')[1]
-            console.log(queryparamsStart);
             const queryparamsArray = queryparamsStart.split('&')
-            console.log(queryparamsArray);
             const objectId = queryparamsArray[1].split('=')[1];
             const venueId = queryparamsArray[2].split('=')[1];
             console.log(objectId, venueId)
-            // this.objectService.setVenue(venueId)
             this.scannerService.isInApp$.subscribe((isInApp: boolean) => {
                 if (!isInApp) {
-                    window.open(event); // => to app component
+                    // if (confirm(`Is in app? : ${isInApp}.`)) {
+                    var open = window.open(event); // => to app component
+                    if (open == null || typeof (open) == 'undefined') {
+
+                        alert(`
+                                "Turn off your pop-up blocker!\n\n
+                                Settins => Safari => Block Pop-ups`)
+                    }
                     return;
+                    // }
                 } else {
+                    // if (confirm(`Is in app? : ${isInApp}.`)) {
                     this.objectService.setObject(venueId, objectId, 'scanner component');
-                    // this.objectService.setObject(objectId)
+                    this.objectService.setVenue(venueId);
                     this.objectService.refreshObject(objectId);
+                    // }
                 }
             })
             this.scannerService.setIsScanning(false);

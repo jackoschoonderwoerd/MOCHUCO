@@ -18,6 +18,7 @@ import { AdminObjectsListItemComponent } from './admin-venue/admin-objects/admin
 import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
 import { AdminObjectAudioComponent } from './admin-venue/admin-objects/admin-object/admin-object-audio/admin-object-audio.component';
+import { DownloadQrComponent } from './admin-venue/admin-objects/admin-objects-list-item/download-qr/download-qr.component';
 
 
 
@@ -40,7 +41,8 @@ import { AdminObjectAudioComponent } from './admin-venue/admin-objects/admin-obj
         AdminObjectsComponent,
         AdminObjectsListItemComponent,
 
-        AdminObjectAudioComponent
+        AdminObjectAudioComponent,
+          DownloadQrComponent
     ],
     imports: [
         CommonModule,

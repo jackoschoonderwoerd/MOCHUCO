@@ -11,7 +11,9 @@
         <button color="primary"
             *ngIf="(authService.mochucoUser$|async)"
             mat-raised-button
-            (click)="onLogOut()"><a href="#">log out</a></button>
+            (click)="onLogOut()"><a href="#">log out</a>
+        </button>
+        <div class="version">Current version: 50</div>
     </div>
     <div *ngIf="(authService.mochucoUser$|async)"
         class="venues">
