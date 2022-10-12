@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Venue } from '../admin/admin.service';
+import { Location } from '../admin/admin.service';
+import { LanguageData } from './models';
+
+// import { SelectLanguageService } from '../navigation/footer/select-language/select-language.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
@@ -13,13 +17,17 @@ export class UiService {
     private isLoadingImageSubject = new BehaviorSubject<boolean>(false);
     public isLoadingImage$ = this.isLoadingImageSubject.asObservable()
 
-    private selectedLanguageSubject = new BehaviorSubject<string>('nl')
-    public selectedLanguage$ = this.selectedLanguageSubject.asObservable();
-
-    private activeVenueSubject = new BehaviorSubject<Venue>(null)
+    private activeVenueSubject = new BehaviorSubject<Location>(null)
     public activeVenue$ = this.activeVenueSubject.asObservable()
 
-    constructor() { }
+    private selectedLanguageSubject = new BehaviorSubject<string>('nl');
+    public selectedLanguage$ = this.selectedLanguageSubject.asObservable()
+
+    constructor(
+
+        // private selectLanguageService: SelectLanguageService,
+        // private snackbarService: MatSnackBar
+    ) { }
 
     setIsLoading(status: boolean) {
         // console.log('isLoading status: ', status);
@@ -30,8 +38,11 @@ export class UiService {
         console.log(status);
         this.isLoadingImageSubject.next(status);
     }
-
-    setLanguage(language: string) {
-        this.selectedLanguageSubject.next(language)
+    setSelectedLanguage(language: string) {
+        this.selectedLanguageSubject.next(language);
     }
+    // openSnackBar(message: string) {
+    //     this.snackbarService.open(message, null, { duration: 5000 });
+    // }
+
 }

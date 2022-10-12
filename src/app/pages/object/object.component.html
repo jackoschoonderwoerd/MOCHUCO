@@ -1,12 +1,21 @@
 <div class="page-container">{{(objectService.object$|async).nameNl ? loadingObject() : notLoadingObject()}}
-
+    <!-- <div class="object">{{(objectService.object$|async|json)}}</div> -->
     <div class="name_likes">
         <div class="name">
+            <!-- <div class="name-nl"
+                [innerHTML]="(objectService.objectNameByLanguage$|async)">
+
+            </div> -->
             <div class="name-nl"
                 *ngIf="(uiService.selectedLanguage$|async) === 'nl'"
                 [innerHTML]="(objectService.object$|async)?.nameNl">
 
             </div>
+            <!-- <div class="">{{selectedLanguageService.selectedLanguage$|async}}</div>
+            <div class="name-nl"
+                [innerHTML]="(objectService.object$|async)?.nameNl">
+            </div> -->
+
             <div class="name-en"
                 *ngIf="(uiService.selectedLanguage$|async) === 'en'"
                 [innerHTML]="(objectService.object$|async)?.nameEn">
@@ -41,6 +50,10 @@
         *ngIf="(uiService.selectedLanguage$|async) === 'nl'"
         [innerHTML]="(objectService.object$|async)?.contentNl">
     </div>
+    <!-- <div class="object-content"
+        [innerHTML]="(objectService.objectContentByLanguage$|async)">
+
+    </div> -->
     <div class="object-content"
         *ngIf="(uiService.selectedLanguage$|async) === 'en'"
         [innerHTML]="(objectService.object$|async)?.contentEn">
@@ -48,14 +61,6 @@
 
     <div *ngFor="let audioUrlData of audioUrlsData"
         class="audio-container">
-
-
-        <!-- <div class="player"
-            *ngIf="audioUrlData.language === uiService.selectedLanguage$|async">
-            <div class="header">{{audioUrlData.language}}</div>
-            <audio [src]="audioUrlData.audioUrl"
-                controls></audio>
-        </div> -->
         <div class="player"
             *ngIf="audioUrlData.language === language">
             <div class="header">{{audioUrlData.language}}</div>
@@ -63,18 +68,4 @@
                 controls></audio>
         </div>
     </div>
-
-    <!-- <div *ngIf="(dutchAudioUrl$|async)?.audioUrl && (uiService.selectedLanguage$|async) === 'nl'"
-        class="audio-container audio-container-nl">
-        <audio controls
-            [src]="(dutchAudioUrl$|async)?.audioUrl">
-        </audio>
-    </div>
-
-    <div *ngIf="(englishAudioUrl$|async)?.audioUrl && (uiService.selectedLanguage$|async) === 'en'"
-        class="">
-        <audio controls
-            [src]="(englishAudioUrl$|async)?.audioUrl">
-        </audio>
-    </div> -->
 </div>

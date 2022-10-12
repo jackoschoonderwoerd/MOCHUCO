@@ -4,6 +4,7 @@
     width: 100%;
     max-width: 500px;
     padding: 1rem;
+
     // border: 3px solid red;
     .admin-header {
         background-color: #ccc;
@@ -11,7 +12,32 @@
         text-transform: uppercase;
         margin: 1rem 0;
     }
+    // .select-language {
+    //     text-transform: uppercase;
+    //     font-weight: bold;
+    // }
+    // .languages {
+    //     .language {
+    //         cursor: pointer;
+    //         display: flex;
 
+    //         .flag {
+    //             width: 2rem;
+    //             margin-right: 1rem;
+    //             img {
+    //                 width: 90%;
+    //             }
+    //         }
+    //         .country {
+    //             width: 10rem;
+    //         }
+    //         .name {
+    //             width: 10rem;
+    //         }
+    //         .abb {
+    //         }
+    //     }
+    // }
     form {
         margin: auto;
         justify-items: center;

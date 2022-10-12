@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AdminService, Venue } from '../../../../admin.service';
+import { AdminService, Location } from '../../../../admin.service';
 import { MochucoObject } from '../../../../../pages/object/object.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class VisitsComponent implements OnInit {
     private venueId: string;
     private mochucoObjectId: string;
     public visits$: Observable<any>;
-    public venue$: Observable<Venue>
+    public venue$: Observable<Location>
     public mochucoObject$: Observable<MochucoObject>
 
     constructor(

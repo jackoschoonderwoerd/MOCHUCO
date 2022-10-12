@@ -3,6 +3,7 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { UiService } from '../../shared/ui.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+// import { SelectLanguageService } from '../../navigation/footer/select-language/select-language.service';
 
 @Component({
     selector: 'app-mochuco',
@@ -14,7 +15,8 @@ export class MochucoComponent implements OnInit {
 
     constructor(
         public uiService: UiService,
-        private router: Router
+        private router: Router,
+        // public selectedLanguageService: SelectLanguageService
         // private dialogRef: MatDialogRef<MochucoComponent>,
         // private dialog: MatDialog
     ) { }

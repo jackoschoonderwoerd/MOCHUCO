@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { MochucoComponent } from '../../pages/mochuco/mochuco.component';
 import { AuthService } from '../../admin/auth/auth.service';
-import { Venue, AdminService } from '../../admin/admin.service';
+import { Location, AdminService } from '../../admin/admin.service';
 
 @Component({
     selector: 'app-header',
@@ -18,7 +18,7 @@ import { Venue, AdminService } from '../../admin/admin.service';
 export class HeaderComponent implements OnInit {
 
 
-    venue: Venue
+    venue: Location
 
 
 
@@ -35,8 +35,8 @@ export class HeaderComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.objectService.venue$.subscribe((venue: Venue) => {
-            console.log(venue)
+        this.objectService.venue$.subscribe((venue: Location) => {
+            // console.log(venue)
             this.venue = venue;
         })
     }

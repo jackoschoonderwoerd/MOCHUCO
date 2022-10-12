@@ -9,6 +9,12 @@ import { AdminObjectComponent } from './admin-venue/admin-objects/admin-object/a
 import { AdminObjectsComponent } from './admin-venue/admin-objects/admin-objects.component';
 import { VisitsComponent } from './admin-venue/admin-objects/admin-objects-list-item/visits/visits.component';
 
+
+
+
+
+
+
 const routes: Routes = [
     { path: '', component: AdminComponent },
     { path: 'signup', component: SignupComponent },
@@ -16,7 +22,9 @@ const routes: Routes = [
     { path: 'admin-venue', component: AdminVenueComponent },
     { path: 'admin-objects', component: AdminObjectsComponent },
     { path: 'admin-object', component: AdminObjectComponent },
-    { path: 'visits', component: VisitsComponent }
+    { path: 'visits', component: VisitsComponent },
+
+
 ];
 
 @NgModule({

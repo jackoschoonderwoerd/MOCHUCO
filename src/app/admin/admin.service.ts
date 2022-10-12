@@ -17,8 +17,9 @@ import {
 import { Observable, take, map, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MochucoObject } from './../pages/object/object.service'
+import { LanguageData } from '../shared/models';
 
-export interface Venue {
+export interface Location {
     nameNl: string;
     contentNl: string;
     nameEn?: string;
@@ -27,6 +28,13 @@ export interface Venue {
     objects?: Object[]
 }
 
+
+
+
+
+
+
+
 @Injectable({
     providedIn: 'root'
 })
@@ -34,47 +42,50 @@ export interface Venue {
 
 export class AdminService {
 
-    venue: Venue = {
+
+
+    venue: Location = {
         nameNl: '',
         contentNl: ''
     }
 
-    private venueSubject = new BehaviorSubject<Venue>(this.venue);
-    venue$ = this.venueSubject as Observable<Venue>;
+
+    private venueSubject = new BehaviorSubject<Location>(this.venue);
+    venue$ = this.venueSubject as Observable<Location>;
 
     constructor(
         private firestore: Firestore,
-        private router: Router
+
     ) { }
 
     getVenues() {
         const venuesRef = collection(this.firestore, 'venues')
-        return collectionData(venuesRef, { idField: 'id' }) as Observable<Venue[]>
+        return collectionData(venuesRef, { idField: 'id' }) as Observable<Location[]>
     }
 
-    getVenue(id) {
+    getLocation(id) {
         console.log(id)
         const venueRef = doc(this.firestore, `venues/${id}`)
         return docData(venueRef, { idField: 'id' });
     }
     getVenueObservable(venueId) {
         const venueRef = doc(this.firestore, `venues/${venueId}`)
-        return docData(venueRef, { idField: 'id' }) as Observable<Venue>;
+        return docData(venueRef, { idField: 'id' }) as Observable<Location>;
     }
     // setVenueToZero() {
     //     this.venueSubject.next(this.venue);
     // }
 
-    addVenue(venue: Venue) {
+    addVenue(venue: Location) {
         console.log(venue);
         const venueRef = collection(this.firestore, 'venues')
         return addDoc(venueRef, venue)
     }
-    updateVenue(venue: Venue) {
+    updateVenue(venue: Location) {
         const venueRef = doc(this.firestore, `venues/${venue.id}`);
         return setDoc(venueRef, venue);
     }
-    deleteVenue(id: string) {
+    deleteLocation(id: string) {
         const venueRef = doc(this.firestore, `venues/${id}`);
         return deleteDoc(venueRef)
     }
@@ -101,11 +112,6 @@ export class AdminService {
         const objectRef = doc(this.firestore, `venues/${venueId}/objects/${objectId}`);
         return docData(objectRef) as Observable<MochucoObject>
     }
-    // getObjectTimesVisitedId(venueId, objectId) {
-    //     console.log(venueId, objectId)
-    //     const objectRef = doc(this.firestore, `venues/${venueId}/objects/${objectId}`);
-    //     return docData(objectRef);
-    // }
 
     updateObject(venueId: string, object: MochucoObject) {
         console.log(venueId, object)

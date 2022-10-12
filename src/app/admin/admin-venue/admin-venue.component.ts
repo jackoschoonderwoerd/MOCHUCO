@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AdminService, Venue } from '../admin.service';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { AdminService, Location } from '../admin.service';
 import { Router, ActivatedRoute } from '@angular/router';
+// import { LanguageService } from '../language-manager/language.service';
+import { Observable } from 'rxjs';
+import { LanguageData } from 'src/app/shared/models';
+
+import { MatDialog } from '@angular/material/dialog';
+
+
 
 
 
@@ -15,24 +22,30 @@ export class AdminVenueComponent implements OnInit {
     form: FormGroup;
     editmode: boolean = false;
     venueId: string;
-    venue: Venue;
+    venue: Location;
+    languages$: Observable<LanguageData[]>
+    forms: FormGroup[] = [];
 
     constructor(
         private fb: FormBuilder,
         private adminService: AdminService,
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+        // public languageService: LanguageService,
+
+
+    ) { }
 
     ngOnInit(): void {
         this.initForm();
-
+        // this.languages$ = this.languageService.getLanguages()
         if (this.route.snapshot.paramMap.get('id')) {
             this.venueId = this.route.snapshot.paramMap.get('id');
             //   console.log(this.venueId)
             this.editmode = true;
 
-            this.adminService.getVenue(this.route.snapshot.paramMap.get('id'))
-                .subscribe((venue: Venue) => {
+            this.adminService.getLocation(this.route.snapshot.paramMap.get('id'))
+                .subscribe((venue: Location) => {
                     this.venue = venue
                     this.form.setValue({ ...venue });
                 })
@@ -45,20 +58,25 @@ export class AdminVenueComponent implements OnInit {
             nameNl: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
             nameEn: new FormControl(null, [Validators.required]),
             contentNl: new FormControl(null, [Validators.required]),
-            contentEn: new FormControl(null, [Validators.required])
+            contentEn: new FormControl(null, [Validators.required]),
+            // languageOptions: new FormControl(null),
+            // languages: new FormArray([])
         })
     }
 
-    getNameNl() {
 
-        // return this.form
+    getLanguageControls() {
+        // console.log((<FormArray>this.form.get('languages')).controls);
+        // return (<FormArray>this.form.get('languages')).controls;
     }
 
+
     onAddVenue() {
-        const venue: Venue = {
+        const venue: Location = {
             ...this.form.value
         }
         console.group(this.form.value)
+        // return;
         if (!this.editmode) {
             this.adminService.addVenue(venue)
                 .then((data: any) => {

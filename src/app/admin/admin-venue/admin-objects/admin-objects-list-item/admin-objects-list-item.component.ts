@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Venue } from 'src/app/admin/admin.service';
+import { Location } from 'src/app/admin/admin.service';
 import { MochucoObject } from '../../../../pages/object/object.service';
 import { AuthService } from '../../../auth/auth.service';
 import { Observable } from 'rxjs';
@@ -22,7 +22,7 @@ export class AdminObjectsListItemComponent implements OnInit {
 
 
     @Input() public mochucoObject: MochucoObject;
-    @Input() public venue: Venue;
+    @Input() public venue: Location;
     timesVisited$: Observable<number>
     registeredVisitsLength: number;
     // visits$: Observable<any>

@@ -1,0 +1,24 @@
+.page-container {
+    .header {
+        // border: 1px solid black;
+        display: flex;
+        .select {
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+            // justify-content: center;
+            // border: 1px solid red;
+        }
+        .close-window {
+            // justify-content: center;
+            // align-self: center;
+            // border: 1px solid red;
+        }
+    }
+    .languages {
+        display: flex;
+        flex-direction: column;
+        .language {
+            margin: 0.3rem;
+        }
+    }
+}

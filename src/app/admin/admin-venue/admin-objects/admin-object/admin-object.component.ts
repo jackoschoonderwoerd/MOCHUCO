@@ -7,9 +7,11 @@ import { MochucoObject, ObjectService } from '../../../../pages/object/object.se
 // import { AngularFireStorage } from '@angular/fire/storage';
 import { AdminObjectService, ImageUploadData } from './admin-object.service';
 import { Observable } from 'rxjs';
-import { Venue } from 'src/app/admin/admin.service';
+import { Location } from 'src/app/admin/admin.service';
 import { AdminObjectAudioService, AudioUrlData } from './admin-object-audio/admin-object-audio.service';
 import { GlobalConstants } from 'src/app/shared/global-contstants';
+import { LanguageData } from '../../../../shared/models';
+// import { LanguageService } from '../../../language-manager/language.service';
 
 @Component({
     selector: 'app-admin-object',
@@ -25,7 +27,9 @@ export class AdminObjectComponent implements OnInit {
         private router: Router,
         private adminObjectService: AdminObjectService,
         public objectService: ObjectService,
-        public adminObjectAudioService: AdminObjectAudioService) { }
+        public adminObjectAudioService: AdminObjectAudioService,
+        // public languageService: LanguageService
+    ) { }
 
 
     form: FormGroup;
@@ -40,8 +44,8 @@ export class AdminObjectComponent implements OnInit {
     // imageStoragePath: string;
     imageUploadData: ImageUploadData;
     isStoringImage: boolean = false;
-    venue$: Observable<Venue>
-    venue: Venue
+    venue$: Observable<Location>
+    venue: Location
     @ViewChild('fileInput') fileInput: ElementRef;
     @ViewChild('audioInputNl') audioInputNl: ElementRef;
     @ViewChild('audioInputEn') audioInputEn: ElementRef;
@@ -52,9 +56,11 @@ export class AdminObjectComponent implements OnInit {
 
     dutchAudioUrl$: Observable<string>;
     englishAudioUrl$: Observable<string>;
+    languages$: Observable<LanguageData[]>
 
 
     ngOnInit(): void {
+        // this.languages$ = this.languageService.getLanguages()
         this.initForm()
         this.adminObjectAudioService.downloadUrl$.subscribe((audioUrlData: AudioUrlData) => {
             console.log(audioUrlData)
@@ -67,7 +73,7 @@ export class AdminObjectComponent implements OnInit {
         })
         this.venueId = this.route.snapshot.paramMap.get('venueId');
         // const venueId = this.route.snapshot.paramMap.get('venueId')
-        this.adminService.getVenue(this.venueId).subscribe((venue: Venue) => {
+        this.adminService.getLocation(this.venueId).subscribe((venue: Location) => {
             this.venue = venue;
         })
         this.venue$ = this.adminService.getVenueObservable(this.venueId);

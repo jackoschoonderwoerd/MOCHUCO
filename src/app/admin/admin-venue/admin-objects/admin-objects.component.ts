@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MochucoObject } from 'src/app/pages/object/object.service';
-import { AdminService, Venue } from '../../admin.service';
+import { AdminService, Location } from '../../admin.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
@@ -26,8 +26,8 @@ export class AdminObjectsComponent implements OnInit {
     editmode: boolean = false;
     venueId: string
     objects$: Observable<MochucoObject[]>
-    venue$: Observable<Venue>;
-    venue: Venue;
+    venue$: Observable<Location>;
+    venue: Location;
     // @ViewChild('qr') private grandParentRef: ElementRef<HTMLElement>
     // parentRef: any
 
@@ -35,7 +35,7 @@ export class AdminObjectsComponent implements OnInit {
         // const venueId = this.route.snapshot.paramMap.get('venueId');
         this.venueId = this.route.snapshot.paramMap.get('venueId');
         this.venue$ = this.adminService.getVenueObservable(this.venueId);
-        this.adminService.getVenue(this.venueId).subscribe((venue: Venue) => {
+        this.adminService.getLocation(this.venueId).subscribe((venue: Location) => {
             this.venue = venue
         })
         this.objects$ = this.adminService.getObjects(this.venueId)

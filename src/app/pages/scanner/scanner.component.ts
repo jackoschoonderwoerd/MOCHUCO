@@ -38,8 +38,8 @@ export class ScannerComponent implements OnInit, OnDestroy {
         // this.cameraButton.nativeElement.click();
         document.getElementById("cameraButton").click();
 
-        const location = window.location.href
-        const headRemoved = location.split('//')[1]
+        const venue = window.location.href
+        const headRemoved = venue.split('//')[1]
         const headAndTailRemoved = headRemoved.split('/')[0]
 
     }
@@ -82,6 +82,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
                     this.objectService.setObject(venueId, objectId, 'scanner component');
                     this.objectService.setVenue(venueId);
                     this.objectService.refreshObject(objectId);
+                    this.objectService.setObjectByLanguage(venueId, objectId)
                     // }
                 }
             })

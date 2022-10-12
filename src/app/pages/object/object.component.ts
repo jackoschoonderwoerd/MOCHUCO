@@ -6,6 +6,7 @@ import { UiService } from '../../shared/ui.service';
 import { AdminService } from '../../admin/admin.service';
 import { AuthService } from '../../admin/auth/auth.service';
 import { AdminObjectAudioService, AudioUrlData } from '../../admin/admin-venue/admin-objects/admin-object/admin-object-audio/admin-object-audio.service';
+// import { SelectLanguageService } from '../../navigation/footer/select-language/select-language.service';
 
 @Component({
     selector: 'app-object',
@@ -25,6 +26,8 @@ export class ObjectComponent implements OnInit {
     englishAudioUrl: string;
     audioUrlsData: AudioUrlData[];
     language: string;
+    selectedLanguage: string;
+    selectedLanguage$: Observable<string>;
 
     // object$: Observable<Object>;
 
@@ -38,11 +41,14 @@ export class ObjectComponent implements OnInit {
         private adminService: AdminService,
         public authService: AuthService,
         public adminObjectAudioService: AdminObjectAudioService,
+        // public selectedLanguageService: SelectLanguageService
     ) {
 
     }
 
     ngOnInit(): void {
+        // this.objectService.setObjectByLanguage(this.venueId, this.objectId)
+        this.selectedLanguage$ = this.uiService.selectedLanguage$
         this.authService.isLoggedIn$.subscribe(status => console.log(status));
         this.uiService.setIsLoadingImage(true);
         this.objectService.venueId$.subscribe((venueId: string) => {
@@ -61,13 +67,11 @@ export class ObjectComponent implements OnInit {
                 })
             });
         });
-        this.uiService.selectedLanguage$.subscribe((language: string) => {
-            console.log(language);
-            this.language = language;
-        })
-        // this.adminObjectAudioService.getDutchAudio(this.venueId, this.objectId)
-        // this.dutchAudioUrl$ = this.adminObjectAudioService.getDutchAudio(this.venueId, this.objectId);
-        // this.englishAudioUrl$ = this.adminObjectAudioService.getEnglishAudio(this.venueId, this.objectId);
+        // this.uiService.selectedLanguage$.subscribe((language: string) => {
+        //     console.log(language);
+        //     this.language = language;
+        // })
+
         this.adminObjectAudioService.getAudioCollection(this.venueId, this.objectId)
             .subscribe((audioUrlsData: AudioUrlData[]) => {
                 console.log(audioUrlsData)
@@ -102,8 +106,6 @@ export class ObjectComponent implements OnInit {
                 this.likeButtonDisabled = false;
 
             })
-        // this.adminService.addLike(this.objectId, this.venueId)
-
     }
 
 }

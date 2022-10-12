@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { AdminService, Venue } from '../../../../admin.service';
+import { AdminService, Location } from '../../../../admin.service';
 import { MochucoObject } from '../../../../../pages/object/object.service';
 import { AdminObjectAudioService, AudioUrlData } from './admin-object-audio.service';
 import { UiService } from '../../../../../shared/ui.service';
@@ -17,7 +17,7 @@ export class AdminObjectAudioComponent implements OnInit {
     @Input() objectId: string;
     editmode: boolean = false;
     mochucoObject: MochucoObject;
-    venue: Venue
+    venue: Location
     audioUrlsData: AudioUrlData[] = []
     @ViewChild('audioInput') audioInput: ElementRef
 
@@ -43,8 +43,8 @@ export class AdminObjectAudioComponent implements OnInit {
                 .subscribe((mochucoObject: MochucoObject) => {
                     this.mochucoObject = mochucoObject
                 })
-            this.adminService.getVenue(this.venueId)
-                .subscribe((venue: Venue) => {
+            this.adminService.getLocation(this.venueId)
+                .subscribe((venue: Location) => {
                     this.venue = venue
                 })
         }

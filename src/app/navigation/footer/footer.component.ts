@@ -2,26 +2,44 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScannerService } from '../../pages/scanner/scanner.service';
 import { UiService } from '../../shared/ui.service';
+import { MatDialog } from '@angular/material/dialog';
+// import { SelectLanguageComponent } from './select-language/select-language.component';
+
+import { Observable } from 'rxjs';
+import { LanguageData } from 'src/app/shared/models';
+// import { SelectLanguageService } from './select-language/select-language.service';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
 
-  constructor(
-    private router: Router,
-    public scannerService: ScannerService,
-    private uiService: UiService
-  ) { }
+    selectedLanguage$: Observable<LanguageData>
+    languages$: Observable<LanguageData[]>
 
-  ngOnInit(): void {
-  }
-  onScanner() {
-    this.router.navigateByUrl('scanner')
-  }
-  onSelectLanguage(language: string) {
-    this.uiService.setLanguage(language)
-  }
+    constructor(
+        private router: Router,
+        public scannerService: ScannerService,
+        public uiService: UiService,
+        private dialog: MatDialog,
+        // private selectLanguageService: SelectLanguageService
+    ) { }
+
+    ngOnInit(): void {
+        // this.selectedLanguage$ = this.uiService.selectedLanguage$
+        // this.selectLanguageService.setLanguage('2lYEBd3kQ1EFZMb0JdDU')
+        // this.languages$ = this.selectLanguageService.getLanguages()
+    }
+    onScanner() {
+        this.router.navigateByUrl('scanner')
+    }
+    onSelectLanguage(language: string) {
+        this.uiService.setSelectedLanguage(language)
+        // this.selectLanguageService.setLanguage(language)
+    }
+    onLanguageSelector() {
+        // const dialogRef = this.dialog.open(SelectLanguageComponent)
+    }
 }

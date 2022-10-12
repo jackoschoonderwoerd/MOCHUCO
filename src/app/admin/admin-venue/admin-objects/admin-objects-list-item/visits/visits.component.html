@@ -2,12 +2,12 @@
     <div class="header">
         <div class="venue-name">
             venue:&nbsp; <span>
-                {{(venue$|async)?.nameNl}}
+                <!-- {{(venue$|async)?.nameNl}} -->
             </span>
         </div>
         <div class="mochuco-object-name">
             object:&nbsp; <span>
-                {{(mochucoObject$|async)?.nameNl}}
+                <!-- {{(mochucoObject$|async)?.nameNl}} -->
             </span>
         </div>
     </div>
@@ -33,7 +33,8 @@
         <button (click)="onBackToObject()"
             mat-raised-button
             color="primary">
-            back to<span class="button-highlight">&nbsp;venue</span>&nbsp;{{(venue$|async)?.nameNl}}
+            back to<span class="button-highlight">&nbsp;venue</span>
+            <!-- &nbsp;{{(venue$|async)?.nameNl}} -->
         </button>
     </div>
 </div>

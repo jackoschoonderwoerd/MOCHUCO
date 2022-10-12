@@ -1,8 +1,33 @@
 <!-- <button mat-raised-button><a routerLink="/admin">admin</a></button> -->
 <div class="page-container">
     <div class="admin-header">
-        <span>venue&nbsp;</span>{{venue?.nameNl}}
+        <!-- <span>venue&nbsp;</span>{{venue?.nameNl}} -->
     </div>
+    <!-- <div class="select-language">select language</div> -->
+    <hr>
+    <!-- <div class="languages"
+        *ngFor="let language of languages$|async"
+        as
+        language>
+        <div class="language"
+            (click)="onLanguageSelected(language)">
+            <div class="flag">
+                <img [src]="language.imageUrl"
+                    alt="">
+            </div>
+            <div class="name">{{language.name}}</div>
+            <div class="country">{{language.country}}</div>
+            <div class="abb">{{language.abb}}</div>
+        </div>
+        <hr>
+
+    </div> -->
+
+
+
+    <div class="forms"
+        *ngFor="let form of forms">{{form.controls.content.value}}</div>
+
     <form [formGroup]="form">
         <mat-form-field>
             <input matInput
@@ -24,20 +49,34 @@
                 formControlName="contentNl"
                 placeholder="content nl">
 
-      </textarea>
+          </textarea>
         </mat-form-field>
         <mat-form-field>
             <textarea rows="7"
                 matInput
                 formControlName="contentEn"
                 placeholder="content en">
-      </textarea>
+          </textarea>
         </mat-form-field>
+
+        <div class="languages"
+            formArrayName="languages"
+            *ngFor="let instrumentControl of getLanguageControls(); let i = index">
+            <mat-form-field class="language">
+                <input matInput
+                    type="text"
+                    class="form-control"
+                    [formControlName]="i"
+                    [placeholder]="i">
+            </mat-form-field>
+        </div>
     </form>
+
     <div class="buttons">
         <button class="edit"
             color="primary"
             mat-raised-button
+            [disabled]="form.invalid"
             (click)="onAddVenue()">{{editmode ? 'save edits' : 'add venue'}}
         </button>
         <button class="show"

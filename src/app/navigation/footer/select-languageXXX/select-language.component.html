@@ -1,0 +1,21 @@
+<div class="page-container">
+    <div class="header">
+        <div class="select">select language</div>
+        <div class="close-window"
+            mat-dialog-close>
+            <!-- <mat-icon>close</mat-icon> -->
+        </div>
+    </div>
+    <!-- <div class="languages">
+        <button class="language"
+            mat-raised-button
+            (click)="onLanguage(language.abb)"
+            *ngFor="let language of languages">{{language.name}}</button>
+    </div> -->
+    <div class="languages">
+        <button class="language"
+            mat-raised-button
+            (click)="onLanguage(language.id)"
+            *ngFor="let language of languages$|async">{{language.name}}</button>
+    </div>
+</div>

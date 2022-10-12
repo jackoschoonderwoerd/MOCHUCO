@@ -5,7 +5,7 @@
             <li (click)="onSelectLanguage('nl')"
                 class="flag"
                 [ngClass]="(uiService.selectedLanguage$|async) === 'nl' ? 'language-selected' : ''">
-                <img src="./../../../assets/flags/flag_nl.png"
+                <img src="./../../../assets/flags/flag-netherlands.jpg"
                     alt="">
             </li>
             <li (click)="onSelectLanguage('en')"
@@ -14,12 +14,20 @@
                 <img src="./../../../assets/flags/flag_en.png"
                     alt="">
             </li>
-            <li (click)="onSelectLanguage('fr')"
+            <li (click)="onSelectLanguage('de')"
                 class="flag"
-                [ngClass]="(uiService.selectedLanguage$|async) === 'fr' ? 'language-selected' : ''">
-                <img src="./../../../assets/flags/flag_fr.png"
+                [ngClass]="(uiService.selectedLanguage$|async) === 'de' ? 'language-selected' : ''">
+                <img src="./../../../assets/flags/flag_de.png"
                     alt="">
             </li>
+            <!-- <li class="selected-language flag">
+                <img [src]="(selectLanguageService.selectedLanguage$|async)?.imageUrl"
+                    alt="">
+            </li>
+            <li class="flag"
+                (click)="onLanguageSelector()">
+                <mat-icon color="warn">language</mat-icon>
+            </li> -->
         </ul>
         <button class="on-scanner"
             mat-raised-button

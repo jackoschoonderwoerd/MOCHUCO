@@ -7,6 +7,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { MochucoComponent } from './pages/mochuco/mochuco.component';
 import { TestComponent } from './pages/test/test.component';
 import { UiService } from './shared/ui.service';
+// import { LocationsService } from './admin/locations/locations.service';
 
 @Component({
     selector: 'app-root',
@@ -24,10 +25,15 @@ export class AppComponent implements OnInit {
         private scannerService: ScannerService,
         private dialog: MatDialog,
         private swUpdate: SwUpdate,
-        private uiService: UiService
+        private uiService: UiService,
+        // private locationService: LocationsService
     ) { }
 
     ngOnInit(): void {
+        console.log('app init')
+        // if (localStorage.getItem('location')) {
+        //     this.locationService.setActiveLocation(JSON.parse(localStorage.getItem('location')))
+        // }
         // console.log(this.router.url);
         // console.log(this.route.snapshot.queryParamMap);
         this.route.queryParamMap.subscribe((queryParamMap: any) => {
@@ -39,7 +45,8 @@ export class AppComponent implements OnInit {
                 const objectId = queryParamMap.params.objectId;
                 // console.log('app.component 32 objectId: ', objectId);
                 this.objectService.setVenue(venueId)
-                this.objectService.setObject(venueId, objectId, 'appComponent')
+                this.objectService.setObject(venueId, objectId, 'appComponent');
+                this.objectService.setObjectByLanguage(venueId, objectId);
                 this.objectService.setVenueObjects(venueId);
                 this.scannerService.setIsInApp(true);
             }

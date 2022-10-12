@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AdminService, Venue } from './admin.service';
+import { AdminService, Location } from './admin.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { ThisReceiver } from '@angular/compiler';
 import { ObjectService } from '../pages/object/object.service';
+import { LanguageData } from '../shared/models';
+// import { SelectLanguageService } from '../navigation/footer/select-language/select-language.service';
 
 @Component({
     selector: 'app-admin',
@@ -13,13 +15,15 @@ import { ObjectService } from '../pages/object/object.service';
 })
 export class AdminComponent implements OnInit, OnDestroy {
     public myAngularxQrCode: string = null;
-    venues$: Observable<Venue[]>
+    venues$: Observable<Location[]>;
+    languages$: Observable<LanguageData[]>
 
     constructor(
         private adminService: AdminService,
         private router: Router,
         public authService: AuthService,
-        private objectService: ObjectService
+        private objectService: ObjectService,
+
     ) {
         this.myAngularxQrCode = 'tutsmake.com';
     }
@@ -33,7 +37,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     onDeleteVenue(id: string) {
         console.log(id);
         if (window.confirm('are you sure?')) {
-            this.adminService.deleteVenue(id)
+            this.adminService.deleteLocation(id)
                 .then(data => console.log(data))
                 .catch(err => console.log(err));
         } else {
@@ -53,8 +57,13 @@ export class AdminComponent implements OnInit, OnDestroy {
     onLogOut() {
         this.authService.logOut()
     }
+    // onManager() {
+    //     this.router.navigateByUrl('admin/manager')
+    // }
+
     ngOnDestroy(): void {
         console.log('admin component destroyed')
         this.objectService.setVenue(null)
     }
+
 }
